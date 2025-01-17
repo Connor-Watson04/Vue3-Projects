@@ -1,8 +1,10 @@
 @import './base.css';
+@import './Mobile.css';
+@import './Tablet.css';
+@import './Laptop.css';
+@import './Monitor.css';
 
 #app {
-  max-width: 1280px;
-
   font-weight: normal;
 }
 
