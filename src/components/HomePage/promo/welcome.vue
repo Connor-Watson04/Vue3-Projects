@@ -38,7 +38,7 @@
 .grid-left {
   color: whitesmoke;
   padding: 2rem;
-  width: 700px;
+  width: 50vw;
   background-color: var(--color-promo);
   border: none;
   border-radius: 11px;

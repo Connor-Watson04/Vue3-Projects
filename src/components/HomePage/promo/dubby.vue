@@ -1,32 +1,34 @@
 <template>
   <section>
-    <h1 class="dubby-header">DUBBY Products</h1>
-    <div class="promoImage-container">
+    <div class="dubby-container">
+      <h1 class="dubby-header">DUBBY Products</h1>
       <img
         class="splatter"
         src="/src/assets/Images/promos/splatter.png"
         alt="splatter background image"
       />
-      <img
-        class="sauce"
-        src="/src/assets/Images/promos/Dubsauce-dubby.png"
-        alt="dubby dubsauce flavour"
-      />
-      <img class="shaker" src="/src/assets/Images/promos/Shaker.png" alt="dubby shaker" />
-      <img
-        class="Peach"
-        src="/src/assets/Images/promos/Peach-dubby.png"
-        alt="dubby peach flavour"
-      />
-    </div>
+      <div class="promoImage-container">
+        <img
+          class="sauce"
+          src="/src/assets/Images/promos/Dubsauce-dubby.png"
+          alt="dubby dubsauce flavour"
+        />
+        <img class="shaker" src="/src/assets/Images/promos/Shaker.png" alt="dubby shaker" />
+        <img
+          class="Peach"
+          src="/src/assets/Images/promos/Peach-dubby.png"
+          alt="dubby peach flavour"
+        />
+      </div>
 
-    <div class="dubbyLink-container">
-      <a
-        class="dubby-link"
-        target="_blank"
-        href="https://www.dubby.gg/discount/MidN1ght?ref=spB4fv3CyQJAij"
-        >Shop Now!</a
-      >
+      <div class="dubbyLink-container">
+        <a
+          class="dubby-link"
+          target="_blank"
+          href="https://www.dubby.gg/discount/MidN1ght?ref=spB4fv3CyQJAij"
+          >Shop Now!</a
+        >
+      </div>
     </div>
   </section>
 </template>
@@ -34,6 +36,10 @@
 <script setup></script>
 
 <style>
+.dubby-container {
+  position: relative;
+}
+
 .dubby-header {
   text-align: center;
   color: var(--color-dubby);
@@ -44,6 +50,8 @@
 
 .promoImage-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 img {
@@ -55,8 +63,8 @@ img {
   position: absolute;
   height: 450px;
   width: 550px;
-  right: -10px;
-  bottom: 50px;
+  top: -20px;
+  left: 50px;
   z-index: -1;
 }
 
@@ -68,20 +76,20 @@ img {
 
 .sauce {
   transform: rotate(-20deg);
-  left: 100px;
+  left: 170px;
   z-index: 1;
 }
 
 .Peach {
   transform: rotate(20deg);
-  right: 210px;
   z-index: 2;
+  right: 150px;
 }
 
 .shaker {
   position: relative;
-  left: -40px;
   z-index: 3;
+  left: 25px;
   height: 310px;
 }
 

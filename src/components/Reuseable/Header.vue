@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { useAccountStatus } from '@/composables/useAccountStatus'
@@ -11,6 +11,30 @@ const isBasketVisible = ref(false)
 const isAnimating = ref(false)
 const searchQuery = ref('')
 const router = useRouter()
+
+const windowWidth = ref(window.innerWidth)
+
+function updateWindowWidth() {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resie', updateWindowWidth)
+})
+
+const isSearch = ref(false)
+
+function displaySearchBar() {
+  isSearch.value = true
+}
+
+function closeSearchBar() {
+  isSearch.value = false
+}
 
 function toggleBasket() {
   isBasketVisible.value = !isBasketVisible.value
@@ -36,28 +60,41 @@ function handleAnimationEnd() {
 
 function handleSearch() {
   router.push({ name: 'product', query: { search: searchQuery.value } })
+  closeSearchBar()
 }
 </script>
 
 <template>
-  <section class="banner">
-    <header>
+  <section id="banner" class="banner">
+    <header class="header">
       <RouterLink to="/">
         <img class="logo" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
       </RouterLink>
 
       <form>
-        <form class="form" @submit="handleSearch">
-          <input
-            class="search"
-            type="search"
-            name="search"
-            placeholder="Search"
-            v-model="searchQuery"
-          />
+        <form class="form" @submit.prevent="handleSearch">
+          <div v-if="windowWidth > 769">
+            <input
+              class="search"
+              type="search"
+              name="search"
+              placeholder="Search"
+              v-model="searchQuery"
+            />
+          </div>
         </form>
       </form>
-      <nav>
+
+      <div v-if="windowWidth <= 481" class="mobile-search">
+        <form @submit.prevent="handleSearch">
+          <Button @click="displaySearchBar" v-if="!isSearch" type="button"> search </Button>
+          <div v-if="isSearch">
+            <input type="search" class="mobileSearchBar" v-model="searchQuery" />
+            <button class="closeMobileSearch" @click="closeSearchBar" type="button">close</button>
+          </div>
+        </form>
+      </div>
+      <nav class="navigation">
         <RouterLink to="/product">Products</RouterLink>
         <button @click="toggleBasket" class="basket-btn">Basket</button>
         <RouterLink :to="`/${accountStatus}`">{{ accountStatus }}</RouterLink>
@@ -74,7 +111,7 @@ function handleSearch() {
   </section>
 </template>
 
-<style scoped>
+<style>
 .banner {
   width: 100vw;
   background-color: var(--color-banner);
@@ -83,7 +120,7 @@ function handleSearch() {
   margin-bottom: 4.6rem;
 }
 
-header {
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -91,7 +128,7 @@ header {
 }
 
 .search {
-  width: 600px;
+  width: 50vw;
   padding: 1rem 0.8rem 1rem 2rem;
   border-radius: 50px;
   justify-self: center;
@@ -117,7 +154,7 @@ nav a {
 
 .logo {
   height: 100px;
-  margin: 0px 80px 14px 0px;
+  margin: 0px 50px 0px 0px;
 }
 
 .basket-btn {
@@ -140,9 +177,6 @@ nav a {
   display: flex;
   justify-content: right;
   z-index: 100;
-}
-
-@media (min-width: 1024px) {
 }
 
 /* Slide-in animation */

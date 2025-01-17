@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-container">
+  <div class="grid-container flex-container">
     <welcome></welcome>
     <dubby></dubby>
   </div>
@@ -13,6 +13,6 @@ import dubby from './dubby.vue'
 <style>
 .grid-container {
   display: grid;
-  grid-template-columns: 700px 600px;
+  grid-template-columns: repeat(2, 50vw);
 }
 </style>

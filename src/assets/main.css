@@ -1,8 +1,8 @@
 @import './base.css';
-@import './Mobile.css';
-@import './Tablet.css';
-@import './Laptop.css';
-@import './Monitor.css';
+@import './mobile.css';
+@import './tablet.css';
+@import './laptop.css';
+@import './monitor.css';
 
 #app {
   font-weight: normal;
