@@ -29,7 +29,7 @@ const router = createRouter({
       component: AccountView
     },
     {
-      path: '/product/:name', // Dynamic segment for product link
+      path: '/product/:URL', // Dynamic segment for product link
       name: 'Product details',
       component: ProductDetailsView,
       props: true // Pass the route params as props

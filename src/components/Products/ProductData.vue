@@ -26,9 +26,7 @@ const props = defineProps({
           <p class="actual-price">£{{ Price }}</p>
         </span>
         <!-- Pass only the product name as a route parameter -->
-        <router-link :to="{ name: 'Product details', params: { name: name } }"
-          >More Info</router-link
-        >
+        <router-link :to="{ name: 'Product details', params: { URL: URL } }">More Info</router-link>
 
         <AddBasket :URL="URL" :name="name" :Price="Price" />
       </div>
