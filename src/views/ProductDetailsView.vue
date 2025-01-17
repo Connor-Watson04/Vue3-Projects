@@ -7,7 +7,6 @@ import { useRoute } from 'vue-router'
 // Get the route parameter (the product name)
 const route = useRoute()
 const productName = route.params.name.trim().toLowerCase() // Trim and make the product name lowercase
-const productURL = route.params.URL.trim().toLowerCase() // Trim and make the product name lowercase
 
 // Product state
 const product = ref(null)
@@ -58,7 +57,7 @@ function next() {
 
 // Find the product by name in the "Product" array from your JSON, using case-insensitive and trimmed matching
 onMounted(() => {
-  product.value = Products.Product.find((p) => p.URL.trim().toLowerCase() === productURL)
+  product.value = Products.Product.find((p) => p.name.trim().toLowerCase() === productName)
 
   if (product.value) {
     // Collect all image URLs
