@@ -33,6 +33,14 @@ const searchQuery = computed(() => route.query.search || '')
     <ProductCard :Products="filterProducts" />
   </div>
 
+  <div v-else-if="searchQuery && filterProducts.Product.length == 0">
+    <h1 class="results">
+      No results found for:
+      <span>{{ searchQuery }}</span>
+    </h1>
+
+    <ProductCard :Products="Products" />
+  </div>
   <div v-else>
     <ProductCard :Products="Products" />
   </div>
