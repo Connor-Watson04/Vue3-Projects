@@ -1,0 +1,55 @@
+{
+  "Product": [
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-White-back-rounded.png?raw=true",
+      "image2": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-Black-back-rounded.png?raw=true",
+      "URL": "N1ghtW0lf04-Hoodie",
+      "name": "N1ghtW0lf04 Hoodie",
+      "Price": 49.99,
+      "OGP": 54.99,
+      "Desc": "This product is a unisex premium hoodie with cotton herritage. It was designed on printful who provide a modern, comfortable fit made with a soft, slightly heavyweight material. This product is one of their best sellers due to is Premium quality. It also comes with easy to remove tear away tags."
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/JellyBellyyt-eco-hoodie.png?raw=true",
+      "URL": "JellyBellyYT-Hoodie",
+      "name": "JellyBellyYT Hoodie",
+      "Price": 49.99,
+      "OGP": 54.99
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hats/LE-Nightwolf-Cap-FrontView-blue.png?raw=true",
+      "URL": "N1ghtW0lf04-Cap",
+      "name": "N1ghtW0lf04 Cap",
+      "Price": 19.99,
+      "OGP": 24.99
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hats/LE-Midge-Bucket-hat-front.png?raw=true",
+      "URL": "Midge-Bucket-Hat",
+      "name": "Midge Bucket Hat",
+      "Price": 19.99,
+      "OGP": 24.99
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hats/LE-FerralWolf-Cap-frontView.png?raw=true",
+      "URL": "FerralWolf-Cap",
+      "name": "FerralWolf Cap",
+      "Price": 19.99,
+      "OGP": 24.99
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/SIS-Team-hoodie-front-flat.png?raw=true",
+      "URL": "SIS-Hoodie",
+      "name": "S-I-S Hoodie",
+      "Price": 49.99,
+      "OGP": 54.99
+    },
+    {
+      "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Jumper/L.E-NW-black-front-flat-jumper.png?raw=true",
+      "URL": "Limited-N1ghtW0lf04-Jumper",
+      "name": "L.E N1ghtW0lf04 Jumper",
+      "Price": 39.99,
+      "OGP": 49.99
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+
+  font-weight: normal;
+}
+
+nav a,
+.basket-btn {
+  text-decoration: none;
+  color: var(--color-text);
+  transition: 0.4s;
+  padding: 13px;
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  nav a:hover {
+    background-color: var(--color-link-foreground);
+  }
+}
+
+@media (min-width: 1024px) {
+}
