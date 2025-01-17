@@ -14,6 +14,7 @@ import ProductData from '@/components/Products/ProductData.vue'
       :key="index"
       :Price="Product.Price"
       :name="Product.name"
+      :image="Product.image"
       :URL="Product.URL"
       :OGP="Product.OGP"
     >
