@@ -36,7 +36,7 @@ const deleteItem = (index) => {
     <div>
       <div v-if="basket.length > 0" class="basketProduct-container">
         <div v-for="(product, index) in basket" :key="index" class="basketProduct">
-          <img :src="product.img" class="basketImage" alt="Product Image" />
+          <img :src="product.image" class="basketImage" alt="Product Image" />
           <div class="basketText">
             <p class="basketName">{{ product.name }}</p>
             <p class="basketSize">Size: {{ product.size }}</p>

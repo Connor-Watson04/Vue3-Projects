@@ -1,4 +1,7 @@
 @import './base.css';
+
+/* devices */
+@import './smallmobile.css';
 @import './mobile.css';
 @import './tablet.css';
 @import './laptop.css';

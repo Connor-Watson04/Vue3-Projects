@@ -56,7 +56,6 @@
 
 img {
   height: 250px;
-  margin-bottom: 30px;
 }
 
 .splatter {
