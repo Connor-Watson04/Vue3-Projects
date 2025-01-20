@@ -88,7 +88,14 @@ function handleSearch() {
 
       <div v-if="windowWidth <= 481" class="mobile-search">
         <form @submit.prevent="handleSearch">
-          <Button @click="displaySearchBar" v-if="!isSearch" type="button"> search </Button>
+          <Button
+            class="mobileSearchButton"
+            @click="displaySearchBar"
+            v-if="!isSearch"
+            type="button"
+          >
+            search
+          </Button>
           <div v-if="isSearch">
             <input type="search" class="mobileSearchBar" v-model="searchQuery" />
             <button class="closeMobileSearch" @click="closeSearchBar" type="button">close</button>

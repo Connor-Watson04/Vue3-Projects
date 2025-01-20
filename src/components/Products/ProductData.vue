@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import AddBasket from '../Basket/AddBasket.vue'
 
@@ -10,16 +11,31 @@ const props = defineProps({
   Price: Number,
   OGP: Number
 })
+
+const windowWidth = ref(window.innerWidth)
+
+function updateWindowWidth() {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resie', updateWindowWidth)
+})
 </script>
 
 <template>
   <div class="ProductCard">
     <div class="image-container">
       <img id="productCardImage" :src="`${image}`" :alt="name" />
-      <h2 class="ProductHeader">{{ name }}</h2>
+      <h2 v-if="windowWidth < 376" class="ProductHeader">{{ name }}</h2>
     </div>
     <div class="ProductData">
       <div class="ProductInfo">
+        <h2 class="ProductHeader">{{ name }}</h2>
         <p>Free Shipping</p>
         <span class="pricing">
           <p class="old-price">£{{ OGP }}</p>
