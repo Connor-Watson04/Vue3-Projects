@@ -10,20 +10,21 @@
   }
 
   header .logo {
-    height: 30px;
+    height: 30px !important;
     margin: 0;
   }
 
   .mobile-search {
     position: relative;
-    width: 10vw;
+    width: 10vw !important;
     margin-right: 2rem;
   }
 
   .mobileSearchBar {
     position: relative;
-    padding: 0.5rem 0.3rem;
-    height: 25px;
+    padding: 0.5rem 0.3rem !important;
+    left: 0px !important;
+    height: 25px !important;
     width: 40vw !important;
   }
 
@@ -93,7 +94,7 @@
   }
 
   .ProductHeader {
-    margin: 5px 10px 0px 0px;
+    margin: 0px;
     font-size: 16px !important;
   }
 

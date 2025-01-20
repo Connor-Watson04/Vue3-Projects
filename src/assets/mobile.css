@@ -1,14 +1,16 @@
-@media (max-width: 480px) {
+@media (max-width: 481px) {
   #banner {
-    padding-left: 1rem;
+    padding-left: 0.2rem;
   }
 
-  .header {
-    gap: 0.5rem;
+  #header {
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
   }
 
   header .logo {
-    height: 30px;
+    height: 40px;
     margin: 0;
   }
 
@@ -21,29 +23,51 @@
   .mobileSearchBar {
     position: relative;
     padding: 0.5rem 0.3rem;
+    left: -40px;
     height: 25px;
-    width: 40vw;
+    width: 33vw;
+  }
+
+  .mobileSearchButton {
+    position: relative;
+    left: -40px;
   }
 
   .closeMobileSearch {
     position: absolute;
     z-index: 20;
     top: 2px;
-    left: 140px;
+    left: 70px;
+  }
+
+  /* .closeIcon {
+    height: 20px;
+    width: 20px;
+    color: black;
+  } */
+
+  #nav-links {
+    font-size: 11px;
   }
 
   div .flex-container {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   div .grid-left {
-    width: 100vw;
+    width: 100%;
+    overflow-y: hidden;
   }
 
   div .splatter {
-    right: -20px;
-    bottom: -20px;
+    height: auto;
+    width: 500px;
+    top: -50px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
   }
 
   div .promoImage-container {
@@ -53,10 +77,60 @@
   }
 
   div .sauce {
-    left: 9rem;
+    left: 11rem;
   }
 
   div .Peach {
-    right: 11rem;
+    right: 10rem;
+  }
+
+  .Home-ProductContainer {
+    flex-direction: column;
+  }
+
+  .ProductCard {
+    display: flex;
+    width: 90vw;
+    height: 250px;
+  }
+  .image-container,
+  .image-container img {
+    max-width: 250px;
+  }
+
+  img #ProductCardImage {
+    margin-bottom: 0px;
+  }
+
+  .ProductHeader {
+    margin: 0px;
+    font-size: 16px;
+  }
+
+  .ProductInfo {
+    padding-left: 0px;
+  }
+
+  .footer {
+    place-content: center;
+  }
+
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 25px;
+  }
+
+  .apologies {
+    width: 75vw;
+  }
+
+  .Details {
+    gap: 5px;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 }
