@@ -9,10 +9,12 @@ const toast = useToast()
 
 // Get product data
 const props = defineProps({
-  URL: String,
   name: String,
-  Price: Number
+  Price: Number,
+  image: String
 })
+
+console.log(props.image)
 
 // Access the basket and addProduct function from shared state
 const { addProduct, basket } = useBasket() // Assuming `basket` is an array that stores products
@@ -33,7 +35,7 @@ function productData(e) {
   // If valid data, add it to the basket
   if (chosenQuantity.value > 0 && ['S', 'M', 'L', 'XL'].includes(selectedSize.value)) {
     const product = {
-      img: props.URL,
+      image: props.image,
       name: props.name,
       size: selectedSize.value,
       quantity: chosenQuantity.value,

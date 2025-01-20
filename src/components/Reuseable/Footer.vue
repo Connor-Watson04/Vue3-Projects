@@ -36,6 +36,7 @@
 .footer {
   background-color: var(--color-promo);
   padding: 1rem 2rem;
+  width: 100vw;
 }
 .footer-logo {
   height: 100px;
@@ -43,7 +44,7 @@
 }
 .apologies {
   color: #ebebeb;
-  width: 400px;
+  width: 40vw;
 }
 .Our-links {
   display: grid;

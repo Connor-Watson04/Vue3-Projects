@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { useAccountStatus } from '@/composables/useAccountStatus'
 import BasketTray from '../Basket/basketTray.vue'
+import closeIcon from './closeIcon.vue'
 
 const { accountStatus } = useAccountStatus()
 
@@ -66,7 +67,7 @@ function handleSearch() {
 
 <template>
   <section id="banner" class="banner">
-    <header class="header">
+    <header id="header" class="header">
       <RouterLink to="/">
         <img class="logo" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
       </RouterLink>
@@ -95,9 +96,9 @@ function handleSearch() {
         </form>
       </div>
       <nav class="navigation">
-        <RouterLink to="/product">Products</RouterLink>
-        <button @click="toggleBasket" class="basket-btn">Basket</button>
-        <RouterLink :to="`/${accountStatus}`">{{ accountStatus }}</RouterLink>
+        <RouterLink id="nav-links" to="/product">Products</RouterLink>
+        <button id="nav-links" @click="toggleBasket" class="basket-btn nav-links">Basket</button>
+        <RouterLink id="nav-links" :to="`/${accountStatus}`">{{ accountStatus }}</RouterLink>
       </nav>
     </header>
     <div v-show="isBasketVisible || isAnimating" class="basket-tray">

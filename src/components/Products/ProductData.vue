@@ -15,10 +15,10 @@ const props = defineProps({
 <template>
   <div class="ProductCard">
     <div class="image-container">
-      <img :src="`${image}`" :alt="name" />
+      <img id="productCardImage" :src="`${image}`" :alt="name" />
+      <h2 class="ProductHeader">{{ name }}</h2>
     </div>
     <div class="ProductData">
-      <h2 class="ProductHeader">{{ name }}</h2>
       <div class="ProductInfo">
         <p>Free Shipping</p>
         <span class="pricing">
@@ -28,7 +28,7 @@ const props = defineProps({
         <!-- Pass only the product name as a route parameter -->
         <router-link :to="{ name: 'Product details', params: { URL: URL } }">More Info</router-link>
 
-        <AddBasket :URL="URL" :name="name" :Price="Price" />
+        <AddBasket :image="image" :name="name" :Price="Price" />
       </div>
     </div>
   </div>

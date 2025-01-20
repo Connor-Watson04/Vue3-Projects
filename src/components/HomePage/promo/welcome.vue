@@ -36,6 +36,8 @@
 <script setup></script>
 <style>
 .grid-left {
+  box-sizing: border-box;
+  overflow: hidden;
   color: whitesmoke;
   padding: 2rem;
   width: 50vw;
