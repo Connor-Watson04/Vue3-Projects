@@ -35,11 +35,10 @@ onBeforeUnmount(() => {
     </div>
     <div class="ProductData">
       <div class="ProductInfo">
-        <<<<<<< HEAD
         <h2 class="ProductHeader">{{ name }}</h2>
-        =======
+
         <h2 v-if="windowWidth > 376" class="ProductHeader">{{ name }}</h2>
-        >>>>>>> improve-responsiveness
+
         <p>Free Shipping</p>
         <span class="pricing">
           <p class="old-price">£{{ OGP }}</p>
