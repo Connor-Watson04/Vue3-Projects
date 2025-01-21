@@ -35,7 +35,11 @@ onBeforeUnmount(() => {
     </div>
     <div class="ProductData">
       <div class="ProductInfo">
+        <<<<<<< HEAD
         <h2 class="ProductHeader">{{ name }}</h2>
+        =======
+        <h2 v-if="windowWidth > 376" class="ProductHeader">{{ name }}</h2>
+        >>>>>>> improve-responsiveness
         <p>Free Shipping</p>
         <span class="pricing">
           <p class="old-price">£{{ OGP }}</p>
@@ -50,11 +54,10 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .ProductCard {
   background-color: white;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
-  height: 600px;
   width: 285px;
   border-radius: 20px;
   overflow: hidden;
@@ -65,7 +68,7 @@ onBeforeUnmount(() => {
   text-align: center;
 }
 
-.image-container img {
+#productCardImage {
   max-width: 100%;
   height: auto;
 }

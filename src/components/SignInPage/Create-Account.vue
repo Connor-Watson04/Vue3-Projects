@@ -56,14 +56,11 @@ const handleSubmit = () => {
 
     const accountName = firstName.value
 
-    console.log(name)
-
     localStorage.setItem(
       'user',
       JSON.stringify({ name, accountName, email, password: password.value })
     )
 
-    console.log(localStorage.getItem('user'))
     toast.success('Account created successfully')
 
     emit('switchToLogin')
