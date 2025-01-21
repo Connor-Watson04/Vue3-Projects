@@ -66,7 +66,7 @@
   cursor: pointer;
   color: #4f8cff;
   height: 20px;
-  width: 150px;
+  width: 100%;
   text-decoration: none;
 }
 

@@ -18,7 +18,7 @@ const totalPrice = computed(() => {
 })
 
 // Function to delete an item
-const deleteItem = (index) => {
+const deleteItem = (index: number) => {
   basket.splice(index, 1)
 
   localStorage.setItem('basketItems', JSON.stringify(basket))
@@ -151,8 +151,8 @@ const deleteItem = (index) => {
 }
 
 .basketProduct {
-  display: grid;
-  grid-template-columns: 150px 140px 10px;
+  display: flex !important;
+  justify-content: space-between;
   border: 1px solid black;
   height: 20vh;
   margin-bottom: 5px;
@@ -187,7 +187,7 @@ const deleteItem = (index) => {
 .checkout {
   position: sticky; /* Anchored to the bottom */
   bottom: 0;
-  width: 22rem;
+  width: 100%;
   font-size: 16px;
   background-color: #fff;
   padding: 1.6rem 1rem;

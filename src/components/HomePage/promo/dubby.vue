@@ -35,7 +35,7 @@
 
 <script setup></script>
 
-<style>
+<style scoped>
 .dubby-container {
   position: relative;
 }
@@ -60,10 +60,10 @@ img {
 
 .splatter {
   position: absolute;
-  height: 450px;
-  width: 550px;
-  top: -20px;
-  left: 50px;
+  height: auto;
+  width: 100%;
+  top: -100px;
+
   z-index: -1;
 }
 

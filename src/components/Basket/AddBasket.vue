@@ -14,8 +14,6 @@ const props = defineProps({
   image: String
 })
 
-console.log(props.image)
-
 // Access the basket and addProduct function from shared state
 const { addProduct, basket } = useBasket() // Assuming `basket` is an array that stores products
 
