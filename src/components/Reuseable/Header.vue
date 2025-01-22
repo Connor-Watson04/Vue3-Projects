@@ -82,7 +82,20 @@ function handleSearch() {
         </form>
       </form>
 
-      <div v-if="windowWidth <= 481" class="mobile-search">
+      <div v-if="windowWidth <= 481 && windowWidth > 375" class="mobile-search">
+        <form @submit.prevent="handleSearch">
+          <div class="mobileSearchBar-Container">
+            <input
+              type="search"
+              class="mobileSearchBar"
+              placeholder="Search"
+              v-model="searchQuery"
+            />
+          </div>
+        </form>
+      </div>
+
+      <div v-if="windowWidth <= 375" class="mobile-search">
         <form @submit.prevent="handleSearch">
           <Button @click="displaySearchBar" v-if="!isSearch" type="button">
             <svg

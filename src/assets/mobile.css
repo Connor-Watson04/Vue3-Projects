@@ -1,54 +1,54 @@
 @media (min-width: 376px) and (max-width: 481px) {
+  /* header */
   #banner {
-    padding-left: 0.2rem !important;
+    padding-left: 0rem;
   }
 
   #header {
-    gap: 25px;
+    gap: 0px !important;
     align-items: center;
-    justify-content: center !important;
+    justify-content: space-between !important;
+  }
+
+  nav #nav-links {
+    padding: 0 5px;
   }
 
   header .logo {
-    height: 40px;
+    height: 30px !important;
     margin: 0;
   }
 
   .mobile-search {
     position: relative;
-    width: 10vw;
-    margin-right: 2rem;
+    width: 35% !important;
   }
 
   .mobileSearchBar {
-    position: relative;
-    padding: 0.5rem 0.3rem;
-    left: -40px;
-    height: 25px;
-    width: 33vw !important;
+    padding: 0.5rem 0.3rem !important;
+    left: 0px !important;
+    height: 25px !important;
+    width: 100% !important;
   }
 
-  .mobileSearchButton {
-    position: relative;
-    left: -40px;
-  }
-
-  .closeMobileSearch {
-    position: absolute;
-    z-index: 20;
-    top: 2px;
-    left: 70px !important;
-  }
+  /* .closeMobileSearch {
+  position: relative;
+  z-index: 20;
+  top: 2px;
+  left: 100px !important;
+} */
 
   /* .closeIcon {
-    height: 20px;
-    width: 20px;
-    color: black;
-  } */
+  height: 20px;
+  width: 20px;
+  color: black;
+} */
 
   #nav-links {
     font-size: 11px;
   }
+
+  /* homepage */
 
   div .flex-container {
     display: flex;
@@ -58,64 +58,101 @@
 
   div .grid-left {
     width: 100%;
-    overflow-y: hidden !important;
+    overflow-y: hidden;
+    padding: 10px;
   }
 
   div .splatter {
     height: auto;
-    width: 500px;
-    top: -50px;
+    width: 100%;
+    top: 0px !important;
     right: 0px;
     left: 0px;
     bottom: 0px;
   }
 
   div .promoImage-container {
-    width: 100vw;
+    width: 100%;
     justify-content: center;
     align-items: center;
   }
 
   div .sauce {
-    left: 11rem !important;
+    left: 40% !important;
+    width: 50% !important;
+    height: auto !important;
   }
 
   div .Peach {
-    right: 10rem !important;
+    right: 35% !important;
+    width: 65% !important;
+    height: auto !important;
   }
 
-  .Home-ProductContainer {
+  div .shaker {
+    top: 10px;
+    width: 75% !important;
+    height: auto !important;
+  }
+
+  div .Home-ProductContainer {
+    padding: 0rem;
+    margin-bottom: 20px;
     flex-direction: column !important;
+  }
+
+  /* PLP */
+
+  .ProductContainer {
+    padding: 0rem !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+    place-items: center;
   }
 
   .ProductCard {
     display: flex;
-    width: 90vw !important;
-    height: 300px;
+    justify-content: space-between;
+    width: 95% !important;
+    padding: 5%;
+    align-items: center;
   }
 
-  img #productCardImage {
+  #productCardImage {
     margin-bottom: 0px !important;
-  }
-
-  .ProductHeader {
-    margin: 0px !important;
-    font-size: 16px !important;
+    height: auto;
+    width: 100%;
   }
 
   .ProductInfo {
-    padding-left: 0px !important;
+    width: 100%;
+  }
+
+  .ProductHeader {
+    margin: 0px;
+    font-size: 16px !important;
   }
 
   /* basket */
+
   .basketProduct {
-    gap: 5%;
     display: flex !important;
+    justify-content: space-between;
   }
 
   .checkout {
+    padding: 1.6rem 0.5rem !important;
     gap: 25%;
     justify-content: normal !important;
+  }
+
+  /* sign in */
+
+  .formContent {
+    width: 95% !important;
+  }
+
+  .emailInput {
+    flex-direction: column !important;
   }
 
   /* footer */
@@ -136,10 +173,11 @@
   }
 
   .Details {
+    width: 100%;
     gap: 5px !important;
   }
 
-  body {
-    overflow-x: hidden !important;
+  .Details-linkd {
+    width: 100%;
   }
 }
