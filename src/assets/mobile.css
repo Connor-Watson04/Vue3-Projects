@@ -37,6 +37,15 @@
 
   /* homepage */
 
+  .heading-primary {
+    font-size: 20px !important;
+  }
+  .why,
+  .shameless-plug,
+  .partnership {
+    font-size: 14px !important;
+  }
+
   div .flex-container {
     display: flex;
     flex-direction: column;
