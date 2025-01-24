@@ -31,11 +31,11 @@ onBeforeUnmount(() => {
   <div class="ProductCard">
     <div class="image-container">
       <img id="productCardImage" :src="`${image}`" :alt="name" />
-      <h2 v-if="windowWidth <= 480" class="ProductHeader">{{ name }}</h2>
+      <h2 v-if="windowWidth <= 375" class="ProductHeader">{{ name }}</h2>
     </div>
     <div class="ProductData">
       <div class="ProductInfo">
-        <h2 v-if="windowWidth > 481" class="ProductHeader">{{ name }}</h2>
+        <h2 v-if="windowWidth > 375" class="ProductHeader">{{ name }}</h2>
         <p>Free Shipping</p>
         <span class="pricing">
           <p class="old-price">£{{ OGP }}</p>
