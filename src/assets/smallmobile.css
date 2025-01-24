@@ -50,6 +50,15 @@
 
   /* homepage */
 
+  .heading-primary {
+    font-size: 16px !important;
+  }
+  .why,
+  .shameless-plug,
+  .partnership {
+    font-size: 12px !important;
+  }
+
   div .flex-container {
     display: flex;
     flex-direction: column;
