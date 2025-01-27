@@ -134,6 +134,27 @@
     text-align: left !important;
   }
 
+  /* PDP */
+  .ProductDetails {
+    display: flex !important;
+    flex-direction: column;
+    width: 100vw !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .PDPImage-container {
+    width: 95% !important;
+    display: block !important;
+    margin-left: 0 !important;
+    margin-bottom: 10px;
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto !important;
+  }
+
   /* basket */
 
   .basketProduct {
@@ -155,6 +176,41 @@
 
   .emailInput {
     flex-direction: column !important;
+  }
+
+  /* My Account */
+
+  .accountArea {
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+  }
+
+  .accountSelectors {
+    flex-direction: row !important;
+    width: 100% !important;
+    margin-bottom: 5px;
+  }
+
+  .accountContainer {
+    height: auto !important;
+    width: 95% !important;
+    margin-right: 0rem !important;
+  }
+
+  .accountName {
+    font-size: 16px !important;
+    margin-bottom: 10px;
+  }
+
+  .order-table {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px;
+  }
+
+  .logOutForm {
+    width: 85% !important;
   }
 
   /* footer */
