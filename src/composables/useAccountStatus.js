@@ -3,10 +3,10 @@ import { ref, provide, inject } from 'vue'
 const accountStatusKey = Symbol('accountStatus')
 
 export function provideAccountStatus() {
-  const accountStatus = ref(localStorage.getItem('accountStatus') || 'Sign-in')
+  const accountStatus = ref(decodeURIComponent(localStorage.getItem('accountStatus') || 'Sign-In'))
   const setAccountStatus = (status) => {
     accountStatus.value = status
-    localStorage.setItem('accountStatus', status)
+    localStorage.setItem('accountStatus', encodeURIComponent(status))
   }
 
   provide(accountStatusKey, { accountStatus, setAccountStatus })

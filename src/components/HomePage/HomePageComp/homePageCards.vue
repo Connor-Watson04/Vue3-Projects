@@ -28,6 +28,7 @@ import ProductData from '@/components/Products/ProductData.vue'
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
   gap: 30px;
 }
 

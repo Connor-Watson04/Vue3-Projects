@@ -1,7 +1,7 @@
 <script setup>
 import AddBasket from '@/components/Basket/AddBasket.vue'
 import Products from '@/products.json'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 
 // Get the route parameter (the product name)
@@ -55,8 +55,16 @@ function next() {
   isFading.value = false
 }
 
+const windowWidth = ref(window.innerWidth)
+
+function updateWindowWidth() {
+  windowWidth.value = window.innerWidth
+}
+
 // Find the product by name in the "Product" array from your JSON, using case-insensitive and trimmed matching
 onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+
   product.value = Products.Product.find((p) => p.URL.trim().toLowerCase() === productURL)
 
   if (product.value) {
@@ -75,11 +83,19 @@ onMounted(() => {
     }
   }
 })
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resie', updateWindowWidth)
+})
 </script>
 
 <template>
   <section v-if="product">
     <div class="ProductDetails">
+      <div v-if="windowWidth <= 481">
+        <h1 class="PDP-title mobilePDP-Title">{{ product.name }}</h1>
+      </div>
+
       <div class="PDPImage-container">
         <button v-if="images.length > 1" class="imageControls buttonPrev" @click="prev()"><</button>
 
@@ -149,7 +165,15 @@ onMounted(() => {
 
 .PDP-title {
   text-align: center;
-  margin: 2rem 0;
+  margin: 0 0 2rem 0;
+}
+
+.mobilePDP-Title {
+  margin-bottom: 0.4rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-background);
+  color: var(--color-text-alt);
 }
 
 .PDP-text {

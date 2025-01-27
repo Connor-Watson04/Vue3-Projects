@@ -7,7 +7,6 @@ import orderHistory from '@/orders.json'
 import myOrders from '@/components/Account/myOrders.vue'
 import myAccount from '@/components/Account/myAccount.vue'
 
-let accountName = ref('')
 let showMyOrders = ref(false)
 let showMyAccount = ref(true)
 let logOutPopUp = ref(false)
@@ -27,27 +26,21 @@ const toggleMyAccount = () => {
 
 // clear account status on log out
 const handleLogOut = () => {
-  setAccountStatus('Sign in')
+  setAccountStatus('Sign-In')
   localStorage.removeItem('accountStatus')
-  router.push({ name: 'Sign In' })
+  router.push({ name: 'Sign-In' })
 }
 
 const displayPopUp = () => {
   logOutPopUp.value = true
+  document.body.style.overflow = 'hidden'
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const closeLogOut = () => {
   logOutPopUp.value = false
+  document.body.style.overflow = ''
 }
-
-onMounted(() => {
-  const storedUser = localStorage.getItem('user')
-
-  if (storedUser) {
-    const user = JSON.parse(storedUser)
-    accountName.value = user.accountName
-  }
-})
 </script>
 
 <template>
@@ -57,21 +50,21 @@ onMounted(() => {
       <button class="selectorButton" @click="toggleMyOrders">My Orders</button>
       <button class="selectorButton" @click="displayPopUp">Sign Out</button>
     </section>
-    <section v-if="logOutPopUp" class="logOutConfirm" @click="closeLogOut">
-      <div class="logOutForm">
-        <p>Are you sure you would like to log out?</p>
-        <div class="confirmationButtons">
-          <button class="logOutFormButton" @click="closeLogOut">No</button>
-          <button class="logOutFormButton yesButton" @click="handleLogOut">Yes</button>
-        </div>
-      </div>
-    </section>
+
     <section class="accountContainer">
-      <h1 class="accountName">Welcome Back {{ accountName }}!</h1>
       <myAccount v-if="showMyAccount" />
       <myOrders v-if="showMyOrders" :orderHistory="orderHistory" />
     </section>
   </main>
+  <section v-if="logOutPopUp" class="logOutConfirm" @click="closeLogOut">
+    <div class="logOutForm">
+      <p>Are you sure you would like to log out?</p>
+      <div class="confirmationButtons">
+        <button class="logOutFormButton" @click="closeLogOut">No</button>
+        <button class="logOutFormButton yesButton" @click="handleLogOut">Yes</button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -113,11 +106,12 @@ onMounted(() => {
 }
 
 .logOutConfirm {
+  z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top: -100px;
+  top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;

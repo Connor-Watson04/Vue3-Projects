@@ -4,7 +4,6 @@ import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { useAccountStatus } from '@/composables/useAccountStatus'
 import BasketTray from '../Basket/basketTray.vue'
-import closeIcon from './closeIcon.vue'
 
 const { accountStatus } = useAccountStatus()
 
@@ -134,7 +133,9 @@ function handleSearch() {
       <nav class="navigation">
         <RouterLink id="nav-links" to="/product">Products</RouterLink>
         <button id="nav-links" @click="toggleBasket" class="basket-btn nav-links">Basket</button>
-        <RouterLink id="nav-links" :to="`/${accountStatus}`">{{ accountStatus }}</RouterLink>
+        <RouterLink id="nav-links" :to="`/${accountStatus}`">{{
+          decodeURIComponent(accountStatus)
+        }}</RouterLink>
       </nav>
     </header>
     <div v-show="isBasketVisible || isAnimating" class="basket-tray">
