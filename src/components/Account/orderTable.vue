@@ -10,12 +10,12 @@ const props = defineProps({
 
 <template>
   <div class="orderTable">
-    <img :src="`${URL}`" />
+    <img :src="`${props.URL}`" />
     <div>
-      <p>Ordered: {{ date }}</p>
+      <p>Ordered: {{ props.date }}</p>
       <span>
-        <p>{{ name }}</p>
-        <p>{{ Price }}</p>
+        <p>{{ props.name }}</p>
+        <p>{{ props.Price }}</p>
       </span>
     </div>
   </div>
