@@ -3,7 +3,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import AddBasket from '../Basket/AddBasket.vue'
 
-const props = defineProps({
+ defineProps({
   URL: String,
   image: String,
   image2: String,
