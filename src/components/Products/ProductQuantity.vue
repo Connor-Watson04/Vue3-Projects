@@ -1,8 +1,8 @@
 <template>
-  <form class="quant">
-    <label class="quantity-text">Quantity:</label>
+  <form class="flex flex-row mb-2 gap-2">
+    <label class="mr-2">Quantity:</label>
     <input
-      class="quant-input"
+      class="!px-1 w-12 text-center text-xs text-black-700 border border-gray-300 rounded"
       type="number"
       maxlength="10"
       placeholder="0"
@@ -12,6 +12,7 @@
     />
   </form>
 </template>
+
 <script setup>
 import { ref } from 'vue'
 
@@ -23,21 +24,3 @@ function emitQuantity() {
   emit('update:quantity', chosenQuantity.value)
 }
 </script>
-<style>
-.quant {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-}
-
-.quantity-text {
-  margin-right: 10px;
-}
-
-.quant-input {
-  padding: 2px 3px;
-  width: 40px;
-  text-align: left;
-  font-size: 12px;
-}
-</style>

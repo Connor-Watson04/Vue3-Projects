@@ -1,18 +1,11 @@
 <template>
-  <div class="grid-container flex-container">
-    <welcome></welcome>
-    <dubby></dubby>
+  <div class="grid grid-cols-2 w-screen">
+    <welcome />
+    <DubbyPromo />
   </div>
 </template>
 
 <script setup>
-import welcome from './welcome.vue'
-import dubby from './dubby.vue'
+import welcome from './welcomeView.vue'
+import DubbyPromo from './dubbyPromo.vue'
 </script>
-
-<style>
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 50vw);
-}
-</style>

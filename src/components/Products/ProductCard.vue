@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="ProductContainer">
+  <div class="p-4 grid grid-cols-4 gap-5 mb-20">
     <ProductData
       v-for="Product in Products.Product"
       :key="Product.name"
@@ -21,12 +21,5 @@ defineProps({
   </div>
 </template>
 
-<style>
-.ProductContainer {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 24%);
-  gap: 20px;
-  margin-bottom: 5rem;
-}
-</style>
+
+
