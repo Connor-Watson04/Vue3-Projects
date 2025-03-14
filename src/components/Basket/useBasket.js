@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, watchEffect } from 'vue'
 
 const state = reactive({
   basket: []
@@ -6,14 +6,20 @@ const state = reactive({
 
 // Initialize basket from localStorage only if it's empty
 function initializeBasket() {
+  const savedBasket = JSON.parse(localStorage.getItem('basketItems')) || []
   if (state.basket.length === 0) {
-    const savedBasket = JSON.parse(localStorage.getItem('basketItems')) || []
     state.basket.push(...savedBasket) // Populate basket from saved data
   }
 }
 
+initializeBasket()
+
+// Sync the basket state with localStorage whenever it changes
+watchEffect(() => {
+  localStorage.setItem('basketItems', JSON.stringify(state.basket))
+})
+
 export function useBasket() {
-  initializeBasket() // Call to ensure basket is loaded from localStorage only once
 
   function addProduct(product) {
     // Check if the product already exists in the basket based on name and size
@@ -23,12 +29,16 @@ export function useBasket() {
 
     if (!exists) {
       state.basket.push(product)
-      localStorage.setItem('basketItems', JSON.stringify(state.basket)) // Sync with localStorage
     }
+  }
+
+  function deleteProduct(index) {
+    state.basket.splice(index, 1)
   }
 
   return {
     basket: state.basket, // Return the reactive basket
-    addProduct
+    addProduct,
+    deleteProduct
   }
 }

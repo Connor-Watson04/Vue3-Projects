@@ -18,7 +18,7 @@ const totalPrice = computed(() => {
 })
 
 // Function to delete an item
-const deleteItem = (index: number) => {
+const deleteItem = (index) => {
   basket.splice(index, 1)
 
   localStorage.setItem('basketItems', JSON.stringify(basket))
@@ -28,7 +28,8 @@ const deleteItem = (index: number) => {
 </script>
 
 <template>
-  <section class="basketContainer">
+  <section>
+    <div class="basketContainer">
     <span class="basketHeading">
       <h1 class="basketTitle">Your Basket</h1>
       <button class="closeBasket" @click="$emit('closeBasket')">Close</button>
@@ -64,11 +65,11 @@ const deleteItem = (index: number) => {
         <h2 class="emptyBasket">Empty Basket</h2>
       </div>
     </div>
-
-    <div class="checkout">
-      <p>Total: £{{ totalPrice.toFixed(2) }}</p>
-      <button class="checkoutBtn">Checkout</button>
-    </div>
+  </div>
+  <div class="sticky z-10 flex justify-between items-center py-2 px-10 bg-white">
+    <p class="text-black" >Total: £{{ totalPrice.toFixed(2) }}</p>
+    <button class="text-black checkoutBtn">Checkout</button>
+</div>
   </section>
 </template>
 

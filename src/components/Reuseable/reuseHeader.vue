@@ -42,9 +42,10 @@ function toggleBasket() {
 }
 
 function closeBasket() {
-  isBasketVisible.value = false
-  isAnimating.value = true // Trigger slide-out animation
+  isAnimating.value = true
+  isBasketVisible.value = false // triggers slide-out animation
 }
+
 
 function handleAnimationEnd() {
   isAnimating.value = false // Stop animation after slide-out completes
@@ -140,11 +141,11 @@ function handleSearch() {
     </header>
     <div v-show="isBasketVisible || isAnimating" class="basket-tray">
       <BasketTray
-        @closeBasket="closeBasket"
-        class="basketContainer"
-        :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
-        @animationend="handleAnimationEnd"
-      />
+         v-if="isAnimating || isBasketVisible"
+          @closeBasket="closeBasket"
+          :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
+         @animationend="handleAnimationEnd"
+           />
     </div>
   </section>
 </template>
