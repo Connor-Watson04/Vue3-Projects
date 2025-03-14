@@ -71,7 +71,7 @@ function handleSearch() {
         <form class="form" @submit.prevent="handleSearch">
           <div v-if="windowWidth > 769">
             <input
-              class="search"
+              class="search bg-gray-300 placeholder-black/100"
               type="search"
               name="search"
               placeholder="Search"
@@ -86,7 +86,7 @@ function handleSearch() {
           <div class="mobileSearchBar-Container">
             <input
               type="search"
-              class="mobileSearchBar"
+              class="mobileSearchBar bg-gray-300 placeholder-black/100"
               placeholder="Search"
               v-model="searchQuery"
             />
