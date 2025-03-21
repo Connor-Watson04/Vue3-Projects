@@ -50,6 +50,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  width: 35%;
 }
 .footer-grid {
   display: grid;
@@ -66,7 +67,7 @@
   cursor: pointer;
   color: #4f8cff;
   height: 20px;
-  width: 100%;
+  width: 50%;
   text-decoration: none;
 }
 
