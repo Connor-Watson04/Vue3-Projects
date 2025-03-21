@@ -15,9 +15,20 @@ const product = ref(null)
 const images = ref([]) // Store image URLs
 const currentImageIndex = ref(0) // Tracks the index of the currently displayed image
 const currentImage = ref(null) // Tracks the current image URL
+const imageInterval = ref(null)
 
 // Fading state
 const isFading = ref(false)
+
+const startImageCycle = (() => {
+  clearInterval(imageInterval.value)
+
+  imageInterval.value = setInterval(() => {
+  switchImage()
+}, 5000)
+
+})
+
 
 // Switch image with fade effect
 function switchImage() {
@@ -42,6 +53,7 @@ function prev() {
     currentImageIndex.value =
       (currentImageIndex.value - 1 + images.value.length) % images.value.length
     currentImage.value = images.value[currentImageIndex.value]
+    startImageCycle()
   }
   isFading.value = false
 }
@@ -51,6 +63,7 @@ function next() {
   if (images.value.length > 1) {
     currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
     currentImage.value = images.value[currentImageIndex.value]
+    startImageCycle()
   }
   isFading.value = false
 }
@@ -77,9 +90,8 @@ onMounted(() => {
 
     // Start auto-switching images if there are more than one
     if (images.value.length > 1) {
-      setInterval(() => {
-        switchImage()
-      }, 5000) // Change image every 5 seconds
+      currentImage.value = images.value[currentImageIndex.value]
+      startImageCycle()   
     }
   }
 })

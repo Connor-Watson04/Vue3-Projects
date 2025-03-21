@@ -1,12 +1,16 @@
 <template>
-  <span class="size">
+  <span class="flex flex-row gap-2 text-center !mb-[5px]">
     <p>Size:</p>
-    <select class="size-input" v-model="selectedSize" @change="emitSize">
-      <option disabled>--</option>
+    <select
+      class="w-10 border border-gray-300 rounded text-center text-xs"
+      v-model="selectedSize"
+      @change="emitSize"
+    >
+      <option >--</option>
       <option value="S">S</option>
       <option value="M">M</option>
       <option value="L">L</option>
-      <option value="XL">XL</option>
+      <option value="XL ">XL</option>
     </select>
   </span>
 </template>
@@ -25,17 +29,3 @@ function emitSize() {
   emit('update:size', selectedSize.value)
 }
 </script>
-
-<style>
-.size {
-  display: flex;
-  flex-direction: row;
-  gap: 2.3rem;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.size-input {
-  width: 40px;
-}
-</style>
