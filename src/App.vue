@@ -8,7 +8,7 @@ provideAccountStatus()
 </script>
 
 <template>
-  <Header></Header>
+  <Header />
   <RouterView />
-  <Footer></Footer>
+  <Footer />
 </template>

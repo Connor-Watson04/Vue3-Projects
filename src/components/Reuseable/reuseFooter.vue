@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-[10px] bg-[var(--color-promo)] py-[2rem] px-[1rem] w-[100vw]">
+  <footer class="!mt-[2rem] bg-[var(--color-promo)] py-[2rem] px-[1rem] w-[100vw]">
     <span>
       <div class="flex items-center justify-between gap-[25rem]">
         <img class="h-[100px]" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="footer logo" />
