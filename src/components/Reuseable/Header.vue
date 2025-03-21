@@ -67,7 +67,6 @@ function handleSearch() {
         <img class="logo" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
       </RouterLink>
 
-      <form>
         <form class="form" @submit.prevent="handleSearch">
           <div v-if="windowWidth > 769">
             <input
@@ -78,8 +77,7 @@ function handleSearch() {
               v-model="searchQuery"
             />
           </div>
-        </form>
-      </form>
+        </form>    
 
       <div v-if="windowWidth <= 481 && windowWidth > 375" class="mobile-search">
         <form @submit.prevent="handleSearch">
@@ -138,7 +136,16 @@ function handleSearch() {
         }}</RouterLink>
       </nav>
     </header>
-    <div v-show="isBasketVisible || isAnimating" class="basket-tray">
+    <div 
+    v-show="isBasketVisible || isAnimating" 
+    class="basket-tray" 
+    >
+    <div
+      v-show="isBasketVisible || isAnimating" 
+      class="basket-cover" 
+      @click="closeBasket"
+      :class="{'fade-in': isBasketVisible, 'fade-out': !isBasketVisible}" 
+      />
       <BasketTray
         @closeBasket="closeBasket"
         class="basketContainer"
@@ -230,10 +237,19 @@ nav a {
   cursor: pointer;
 }
 
+.basket-cover {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
 .basket-tray {
   position: absolute;
   right: 0px;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: right;
   z-index: 100;
@@ -241,30 +257,70 @@ nav a {
 
 /* Slide-in animation */
 @keyframes slideIn {
-  from {
+  0% {
     transform: translateX(100%);
   }
-  to {
+  100% {
     transform: translateX(0);
   }
 }
 
 /* Slide-out animation */
 @keyframes slideOut {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
+  100% {
     transform: translateX(100%);
   }
 }
 
 /* Apply animations when classes are toggled */
-.basketContainer.slide-in {
+.basketContainer.slide-in
+{
   animation: slideIn 0.8s forwards;
 }
 
-.basketContainer.slide-out {
+.basketContainer.slide-out
+{
   animation: slideOut 0.4s forwards;
 }
+
+/* fade in */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    background-color: rgba(0,0,0,0);
+  } 
+  100%{
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+/* fade out */
+
+@keyframes fadeOut {
+  0%{
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    opacity: 1;
+    background-color: rgba(0,0,0,0);
+  } 
+}
+
+.basket-tray.fade-in {
+  animation: fadeIn 0.8s forwards;
+  background-color: rgba(0,0,0,0.5);
+}
+
+
+.basket-tray.fade-out {
+  animation: fadeOut 8s forwards;
+  background-color: rgba(0,0,0,0);
+
+}
+
 </style>

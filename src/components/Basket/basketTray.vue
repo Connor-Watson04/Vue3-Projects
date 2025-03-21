@@ -21,6 +21,12 @@ const promptDelete = (index: number) => {
   showConfirmPopup.value = true
 }
 
+// Close popup
+const closePopup = () => {
+  showConfirmPopup.value = false
+  selectedItemIndex.value = null
+}
+
 // Confirm delete
 const confirmDelete = () => {
   if (selectedItemIndex.value !== null) {
@@ -30,17 +36,10 @@ const confirmDelete = () => {
   }
   closePopup()
 }
-
-// Close popup
-const closePopup = () => {
-  showConfirmPopup.value = false
-  selectedItemIndex.value = null
-}
 </script>
 
 <template>
   <main>
-
   <span class="basketHeading">
     <h1 class="basketTitle">Your Basket</h1>
     <button class="closeBasket" @click="$emit('closeBasket')">Close</button>
@@ -91,7 +90,6 @@ const closePopup = () => {
     <button class="checkoutBtn">Checkout</button>
   </div>
 </main>
-
 </template>
 
 <style scoped>
