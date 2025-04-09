@@ -156,7 +156,7 @@ const handleSubmit = () => {
   </section>
 </template>
 
-<style>
+<style scoped>
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -169,10 +169,6 @@ const handleSubmit = () => {
 #email {
   display: flex;
   flex-direction: column;
-}
-
-input {
-  padding: 8px 1rem;
 }
 
 .emailInput {

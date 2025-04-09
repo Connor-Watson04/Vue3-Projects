@@ -60,7 +60,7 @@ const handleLogin = () => {
   </section>
 </template>
 
-<style>
+<style scoped>
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -75,7 +75,4 @@ const handleLogin = () => {
   display: flex;
 }
 
-input {
-  padding: 8px 1rem;
-}
 </style>

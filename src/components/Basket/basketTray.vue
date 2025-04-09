@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useBasket } from './useBasket'
+import { basketState } from '../../composables/basketState'
+import { useBasket } from '@/composables/useBasket'
 import { useToast } from 'vue-toastification'
 import removeConfirmation from '@/components/Reuseable/removeConfirmation.vue' // Import the reusable popup
 
 const toast = useToast()
-const { basket } = useBasket()
+const { basket } = basketState()
+const { isBasketVisible, closeBasket } = useBasket()
 
 const showConfirmPopup = ref(false)
 const selectedItemIndex = ref<number | null>(null)
@@ -39,11 +41,12 @@ const confirmDelete = () => {
 </script>
 
 <template>
-  <main>
-  <span class="basketHeading">
-    <h1 class="basketTitle">Your Basket</h1>
-    <button class="closeBasket" @click="$emit('closeBasket')">Close</button>
-  </span>
+   <main class="basketContainer" @animationend="$emit('animationend')"
+        :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }">
+    <span class="basketHeading">
+      <h1 class="basketTitle">Your Basket</h1>
+      <button class="closeBasket" @click="closeBasket">Close</button>
+    </span>
   <section class="basketContainer">
     <div>
       <div v-if="basket.length > 0" class="basketProduct-container">

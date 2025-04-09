@@ -15,7 +15,7 @@
 import { ref, computed, onMounted } from 'vue'
 import ProductSizes from '@/components/Products/ProductSizes.vue'
 import ProductQuantity from '@/components/Products/ProductQuantity.vue'
-import { useBasket } from './useBasket'
+import { basketState } from '../../composables/basketState'
 import { useToast } from 'vue-toastification'
 
 const toast = useToast()
@@ -28,7 +28,7 @@ const props = defineProps({
 })
 
 // Access the basket and addProduct function from shared state
-const { addProduct } = useBasket() // Assuming `basket` is an array that stores products
+const { addProduct } = basketState() // Assuming `basket` is an array that stores products
 
 // Create refs to store the selected size and quantity
 const selectedSize = ref('')

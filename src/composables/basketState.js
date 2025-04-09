@@ -19,7 +19,7 @@ watchEffect(() => {
   localStorage.setItem('basketItems', JSON.stringify(state.basket))
 })
 
-export function useBasket() {
+export function basketState() {
 
   function addProduct(product) {
     // Check if the product already exists in the basket based on name and size

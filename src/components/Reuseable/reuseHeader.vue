@@ -2,14 +2,19 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { useAccountStatus } from '@/composables/useAccountStatus'
+import { useBasket } from '@/composables/useBasket'
+
+const { isBasketVisible, isAnimating, closeBasket } = useBasket()
+
+
+import Input from './Input.vue'
+import Button from './Button.vue'
+
 import BasketTray from '../Basket/basketTray.vue'
 import SearchIcon from './icons/searchIcon.vue'
+import CloseIcon from './icons/closeIcon.vue'
+import Navigation from './Navigation.vue'
 
-const { accountStatus } = useAccountStatus()
-
-const isBasketVisible = ref(false)
-const isAnimating = ref(false)
 const searchQuery = ref('')
 const router = useRouter()
 
@@ -18,6 +23,9 @@ const windowWidth = ref(window.innerWidth)
 function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
+
+const isMobile = window.innerWidth <= 481
+
 
 onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
@@ -37,17 +45,6 @@ function closeSearchBar() {
   isSearch.value = false
 }
 
-function toggleBasket() {
-  isBasketVisible.value = !isBasketVisible.value
-  isAnimating.value = true // Start animation
-}
-
-function closeBasket() {
-  isAnimating.value = true
-  isBasketVisible.value = false // triggers slide-out animation
-}
-
-
 function handleAnimationEnd() {
   isAnimating.value = false // Stop animation after slide-out completes
   // Enable scrolling again only after slide-out animation
@@ -63,17 +60,17 @@ function handleSearch() {
 </script>
 
 <template>
-  <section class="w-full bg-[var(--color-banner)] shadow-[rgba(0, 0, 0, 0.4)] !mb-[4rem]">
-    <header class="flex flex-row items-center justify-evenly gap-[1rem]">
+  <section class="relative w-full h-[100px] bg-[var(--color-banner)] shadow-[rgba(0, 0, 0, 0.4)] !mb-[4rem]">
+    <header class="flex flex-row items-center h-full justify-center gap-[1rem]">
       <RouterLink to="/">
-        <img class="h-[100px] mr-[50px]" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
+        <img class="h-[75px] " src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
       </RouterLink>
 
         <form @submit.prevent="handleSearch">
-          <div v-if="windowWidth >= 750">
-            <input
+          <div v-if="!isMobile">
+            <Input
             class="w-[50vw] !py-[1rem] !pr-[0.8rem] !pl-[2rem] rounded-[50px] justify-center border-none text-base text-start bg-gray-300 placeholder-black/100"
-              type="search"
+              inputType="search"
               name="search"
               placeholder="Search"
               v-model="searchQuery"
@@ -81,40 +78,26 @@ function handleSearch() {
           </div>
         </form>    
 
-      <div v-if="windowWidth <= 481 && windowWidth >= 375" class="mobile-search">
+      <div v-if="isMobile">
         <form @submit.prevent="handleSearch">
-          <div class="relative align-center flex justify-end">
-            <input
-              type="search"
-              class="w-full box-border bg-gray-300 placeholder-black/100"
-              placeholder="Search"
-              v-model="searchQuery"
-            />
-          </div>
-        </form>
-      </div>
-
-      <div v-if="windowWidth <= 375" class="mobile-search">
-        <form @submit.prevent="handleSearch">
-          <Button @click="displaySearchBar" v-if="!isSearch" type="button">
+          <Button @click="displaySearchBar" v-if="!isSearch" buttonType="button">
             <SearchIcon class="h-[24px] w-[24px]"/>
           </Button>
-          <div v-if="isSearch" class="mobileSearchBar-Container bg-gray-300">
-            <input type="search" class="mobileSearchBar" v-model="searchQuery" />
-            <div class="absolute right-[5px] top-[50%] -translate-y-[50%] cursor-pointer" @click="closeSearchBar" type="button">
-           </div>
-          </div>
         </form>
       </div>
-      <nav class="navigation">
-        <RouterLink id="nav-links" to="/product">Products</RouterLink>
-        <button id="nav-links" @click="toggleBasket" class="basket-btn nav-links">Basket</button>
-        <RouterLink id="nav-links" :to="`/${accountStatus}`">{{
-          decodeURIComponent(accountStatus)
-        }}</RouterLink>
-      </nav>
+      <Navigation/>
     </header>
-    <div 
+
+    <div v-if="isSearch" class="absolute top-0 z-[100] w-full h-[110vh] bg-black/50">
+      <div class="bg-gray-200 w-full h-1/10 flex items-center justify-center">
+        <Input inputType="search" class="border-[1px] border-black w-1/2 h-1/3 bg-gray-300" v-model="searchQuery" inputPlaceholder="Search">
+          <CloseIcon class="h-[24px] w-[24px]" @click="closeSearchBar"/>
+        </Input>
+      </div>
+      <div class="top-0 z-[100] w-full h-[110vh] bg-black/50" @click="closeSearchBar"/>
+      </div>
+  
+      <div 
     v-show="isBasketVisible || isAnimating" 
     class="basket-tray" 
     >
@@ -125,41 +108,17 @@ function handleSearch() {
       :class="{'fade-in': isBasketVisible, 'fade-out': !isBasketVisible}" 
       />
       <BasketTray
-         v-if="isAnimating || isBasketVisible"
-          @closeBasket="closeBasket"
-          :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
-         @animationend="handleAnimationEnd"
-           />
+    v-if="isAnimating || isBasketVisible"
+    @closeBasket="closeBasket"
+    :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
+    @animationend="handleAnimationEnd"
+  />
     </div>
+
   </section>
 </template>
 
 <style>
-.closeMobileSearch {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-link);
-}
-
-nav {
-  display: inline;
-}
-
-nav a {
-  border-right: 1px solid var(--color-border);
-  padding: 0 1rem;
-  text-align: center;
-  color: var(--color-text);
-}
-
-
-
 .basket-btn {
   background: none;
   border: none;

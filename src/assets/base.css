@@ -94,6 +94,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+  scrollbar-width: 1px;
   font-weight: normal;
   scrollbar-width: thin;
   scroll-behavior: smooth;
