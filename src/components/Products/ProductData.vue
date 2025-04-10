@@ -28,14 +28,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="bg-white shadow-lg w-[285px] rounded-2xl overflow-hidden text-black">
-    <div class="relative">
-      <img id="productCardImage" class="w-full h-auto" :src="image" :alt="name" />
+  <div class="flex flex-row bg-white shadow-lg w-full h-[200px] rounded-2xl overflow-hidden text-black">
+    <div class="relative w-1/2">
+      <img class="h-full w-full" :src="image" :alt="name" />
       <h2 v-if="windowWidth <= 375" class="text-center text-lg font-semibold">{{ name }}</h2>
     </div>
-    <div class="p-5">
+    <div class="py-1">
       <div>
-        <h2 v-if="windowWidth > 375" class="text-center text-lg font-semibold">{{ name }}</h2>
+        <h2 v-if="windowWidth > 375" class="text-base font-semibold">{{ name }}</h2>
         <p class="text-gray-600">Free Shipping</p>
         <div class="flex items-center gap-2">
           <p class="text-red-500 line-through text-sm">£{{ OGP }}</p>

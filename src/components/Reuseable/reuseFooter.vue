@@ -1,12 +1,8 @@
 <template>
-  <footer class="!mt-[2rem] bg-[var(--color-promo)] py-[2rem] px-[1rem] w-[100vw]">
+  <footer class="!mt-[2rem] bg-[var(--color-promo)] py-1 px-[1rem] w-[100vw] overflow-hidden">
     <span>
-      <div class="flex items-center justify-between gap-[25rem]">
+      <div class="flex items-center justify-center !mb-4">
         <img class="h-[100px]" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="footer logo" />
-        <span class="flex flex-row w-full gap-[12rem]">
-          <h1 class="w-1/2 text-center text-lg underline">Informational Pages</h1>
-          <h1 class="w-1/2 text-lg text-center underline">Our Links</h1>
-        </span>
       </div>
       <div class="flex gap-[5rem] select-none">
         <div>

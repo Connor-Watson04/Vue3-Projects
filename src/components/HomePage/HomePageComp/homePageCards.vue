@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center gap-4 p-8">
+  <div class="flex flex-col justify-center items-center gap-3 p-2">
     <!-- eslint-disable vue/valid-v-for -->
     <ProductData
       class="transition-transform duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2"

@@ -1,32 +1,10 @@
 <template>
   <section>
     <div class="relative">
-      <h1 class="text-center text-[var(--color-dubby)] font-semibold text-shadow-md z-10">
+      <h1 class="text-center text-xl text-[var(--color-dubby)] !font-bold text-shadow-md z-10">
         DUBBY Products
       </h1>
-      <img
-        class="absolute top-[-100px] w-full h-auto z-[-1]"
-        src="/src/assets/Images/promos/splatter.png"
-        alt="splatter background image"
-      />
-      <div class="flex justify-center items-center">
-        <img
-          class="h-[250px] relative top-12 left-[170px] rotate-[-20deg] z-10"
-          src="/src/assets/Images/promos/Dubsauce-dubby.png"
-          alt="dubby dubsauce flavour"
-        />
-        <img
-          class="h-[310px] relative left-[25px] z-30"
-          src="/src/assets/Images/promos/Shaker.png"
-          alt="dubby shaker"
-        />
-        <img
-          class="h-[250px] relative top-12 right-[150px] rotate-[20deg] z-20"
-          src="/src/assets/Images/promos/Peach-dubby.png"
-          alt="dubby peach flavour"
-        />
-      </div>
-
+      <img src="/src/assets/Images/promos/promo.png" />
       <div class="text-center mt-4">
         <a
           class="relative text-[var(--color-dubby)] bg-[var(--color-promo)] px-6 py-4 rounded-lg inline-block transition-transform duration-150 hover:-translate-y-[1px] hover:bg-gray-700 active:translate-y-[2px] active:bg-gray-900"

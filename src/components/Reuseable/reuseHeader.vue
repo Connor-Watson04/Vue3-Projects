@@ -9,6 +9,7 @@ const { isBasketVisible, isAnimating, closeBasket } = useBasket()
 
 import Input from './Input.vue'
 import Button from './Button.vue'
+import Text from './Text.vue'
 
 import BasketTray from '../Basket/basketTray.vue'
 import SearchIcon from './icons/searchIcon.vue'
@@ -60,10 +61,10 @@ function handleSearch() {
 </script>
 
 <template>
-  <section class="relative w-full h-[100px] bg-[var(--color-banner)] shadow-[rgba(0, 0, 0, 0.4)] !mb-[4rem]">
-    <header class="flex flex-row items-center h-full justify-center gap-[1rem]">
+  <section class="relative w-full h-[100px] bg-[var(--color-banner)] shadow-[rgba(0, 0, 0, 0.4)] !mb-[3rem]">
+    <header class="flex flex-col items-center h-full justify-evenly">
       <RouterLink to="/">
-        <img class="h-[75px] " src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
+        <img class="h-[65px] w-auto" src="/src/assets/Images/Logo/S-I-S Logo.png" alt="homepage" />
       </RouterLink>
 
         <form @submit.prevent="handleSearch">
@@ -77,22 +78,25 @@ function handleSearch() {
             />
           </div>
         </form>    
-
-      <div v-if="isMobile">
-        <form @submit.prevent="handleSearch">
-          <Button @click="displaySearchBar" v-if="!isSearch" buttonType="button">
-            <SearchIcon class="h-[24px] w-[24px]"/>
-          </Button>
-        </form>
-      </div>
-      <Navigation/>
+        <div class="h-[3px] w-5/6 bg-gray-600"></div>
+  <div class="flex flex-row items-center justify-center w-full h-full gap-2">
+    <div v-if="isMobile">
+    <form @submit.prevent="handleSearch">
+      <Button @click="displaySearchBar" v-if="!isSearch" buttonType="button">
+        <Text>Search</Text>
+      </Button>
+    </form>
+  </div>
+    <Navigation/>
+  </div>
     </header>
 
     <div v-if="isSearch" class="absolute top-0 z-[100] w-full h-[110vh] bg-black/50">
-      <div class="bg-gray-200 w-full h-1/10 flex items-center justify-center">
-        <Input inputType="search" class="border-[1px] border-black w-1/2 h-1/3 bg-gray-300" v-model="searchQuery" inputPlaceholder="Search">
-          <CloseIcon class="h-[24px] w-[24px]" @click="closeSearchBar"/>
+      <div class="bg-gray-200 w-full h-1/10 flex items-center justify-center ">
+        <Input inputType="search" class="border-[1px] border-black bg-gray-300 !w-[275px] !h-[50px]" v-model="searchQuery" inputPlaceholder="Search">
+          <SearchIcon class="h-[24px] w-[24px] text-black" @click="handleSearch()"/>
         </Input>
+        <CloseIcon class="absolute text-black top-2 right-3" @click="closeSearchBar"/>
       </div>
       <div class="top-0 z-[100] w-full h-[110vh] bg-black/50" @click="closeSearchBar"/>
       </div>

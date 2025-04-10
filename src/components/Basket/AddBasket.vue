@@ -1,5 +1,5 @@
 <template>
-  <form class="flex flex-col gap-4" @submit.prevent="productData">
+  <form class="flex flex-col" @submit.prevent="productData">
     <!-- Bind the selected size to the ProductSizes component -->
     <ProductSizes v-model:size="selectedSize" />
     <ProductQuantity v-model:quantity="chosenQuantity" />

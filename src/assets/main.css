@@ -1,18 +1,10 @@
 @import './base.css';
 @import "tailwindcss";
 
-/* devices */
-@import './smallmobile.css';
-@import './mobile.css';
-@import './tablet.css';
-@import './laptop.css';
-@import './monitor.css';
-
 #app {
   font-weight: normal;
 }
 
-nav a,
 .basket-btn {
   text-decoration: none;
   color: var(--color-text);

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 w-screen">
+  <div class="flex flex-col w-screen">
     <welcome />
     <DubbyPromo />
   </div>

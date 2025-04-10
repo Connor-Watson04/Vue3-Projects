@@ -1,5 +1,5 @@
 <template>
-  <div class="box-border overflow-hidden text-white p-8 w-full bg-[var(--color-promo)] rounded-xl shadow-[var(--box-shadow)]">
+  <div class="box-border overflow-hidden text-white p-8 w-full bg-[var(--color-promo)] rounded-xl shadow-[var(--box-shadow)] !mb-5">
     <h1 class="text-2xl font-bold">Welcome to S-I-S SQUAD Merch Line</h1>
     <p class="mt-4">
       Here at S-I-S SQUAD we decided to provide you with some <strong>DRIPPY</strong> merch. <br />
