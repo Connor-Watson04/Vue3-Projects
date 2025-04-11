@@ -32,7 +32,7 @@ onMounted(() => {
           v-for="(toy, index) in Toys"
           :key="toy.name + index"
           :id="'slide-' + index"
-          class="snap-center flex flex-row justify-center items-center min-w-[99%]"
+          class="snap-center flex flex-row justify-center items-center min-w-[100%] h-[500px]"
         >
           <toyView :conceptToy="toy" />
         </div>

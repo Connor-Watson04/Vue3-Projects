@@ -4,13 +4,13 @@
         "Toys":
         [
             {
-            "name":"N1ghtW0lf04 Action Figure",
+            "name":"N1ghtW0lf04 Figure",
             "image":"/src/assets/Images/concepts/NightToy.png",
             "Price":4.99
             },
             {
-            "name":"N1ghtW0lf04 Action Figure",
-            "image":"/src/assets/Images/concepts/NightToy.png",
+            "name":"ibedrippin Figure",
+            "image":"/src/assets/Images/concepts/drippinToy.png",
             "Price":4.99
             }
     ] 

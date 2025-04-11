@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 import { useBasket } from '@/composables/useBasket'
@@ -46,6 +46,15 @@ function closeSearchBar() {
   isSearch.value = false
 }
 
+watch(isSearch, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+});
+
+
 function handleAnimationEnd() {
   isAnimating.value = false // Stop animation after slide-out completes
   // Enable scrolling again only after slide-out animation
@@ -80,7 +89,7 @@ function handleSearch() {
         </form>    
         <div class="h-[3px] w-5/6 bg-gray-600"></div>
   <div class="flex flex-row items-center justify-center w-full h-full gap-2">
-    <div v-if="isMobile">
+    <div v-if="isMobile" >
     <form @submit.prevent="handleSearch">
       <Button @click="displaySearchBar" v-if="!isSearch" buttonType="button">
         <Text>Search</Text>
@@ -91,14 +100,14 @@ function handleSearch() {
   </div>
     </header>
 
-    <div v-if="isSearch" class="absolute top-0 z-[100] w-full h-[110vh] bg-black/50">
+    <div v-if="isSearch" class="absolute top-0 z-[100] w-full h-[110vh]">
       <div class="bg-gray-200 w-full h-1/10 flex items-center justify-center ">
         <Input inputType="search" class="border-[1px] border-black bg-gray-300 !w-[275px] !h-[50px]" v-model="searchQuery" inputPlaceholder="Search">
           <SearchIcon class="h-[24px] w-[24px] text-black" @click="handleSearch()"/>
         </Input>
         <CloseIcon class="absolute text-black top-2 right-3" @click="closeSearchBar"/>
       </div>
-      <div class="top-0 z-[100] w-full h-[110vh] bg-black/50" @click="closeSearchBar"/>
+      <div class="top-0 z-[100] w-full h-[110vh] bg-black/75" @click="closeSearchBar"/>
       </div>
   
       <div 
