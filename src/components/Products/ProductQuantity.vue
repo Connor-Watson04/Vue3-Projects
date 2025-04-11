@@ -1,20 +1,27 @@
 <template>
-  <form class="flex flex-row mb-2 gap-2">
-    <label class="mr-2">Quantity:</label>
+  <div class="flex items-center gap-2 !mb-2">
+    <Button type="button" class="bg-gray-200 rounded-lg p-1" @click="chosenQuantity--">
+      <MinusIcon />
+    </Button>
     <input
-      class="!px-1 w-12 text-center text-xs text-black-700 border border-gray-300 rounded"
-      type="number"
-      maxlength="10"
-      placeholder="0"
-      min="0"
-      v-model="chosenQuantity"
-      @change="emitQuantity"
+    class="!px-1 h-full w-12 text-center text-xs text-black-700 border border-gray-300 rounded"
+    type="number"
+    placeholder="0"
+    v-model="chosenQuantity"
+    @change="emitQuantity"
     />
-  </form>
+    <Button type="button" class="bg-gray-200 rounded-lg p-1" @click="chosenQuantity++">
+      <PlusIcon />
+    </Button>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+import Button from '../Reuseable/Button.vue'
+import MinusIcon from '../Reuseable/icons/minusIcon.vue'
+import PlusIcon from '../Reuseable/icons/plusIcon.vue'
 
 const chosenQuantity = ref(0)
 
