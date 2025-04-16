@@ -12,8 +12,6 @@ import AddBasket from '../Basket/AddBasket.vue'
   OGP: Number
 })
 
-console.log(name)
-
 const windowWidth = ref(window.innerWidth)
 
 function updateWindowWidth() {

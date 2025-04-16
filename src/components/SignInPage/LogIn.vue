@@ -4,6 +4,9 @@ import { useToast } from 'vue-toastification'
 import { useRouter } from 'vue-router'
 import { useAccountStatus } from '@/composables/useAccountStatus'
 
+import Input from '../Reuseable/Input.vue'
+import Button from '../Reuseable/Button.vue'
+
 const router = useRouter()
 const toast = useToast()
 const emailInput = ref('')
@@ -32,47 +35,30 @@ const handleLogin = () => {
 
 <template>
   <section>
-    <form class="loginForm" @submit.prevent="handleLogin">
-      <div class="Login-formEmail">
+    <form class="flex flex-col items-center gap-2" @submit.prevent="handleLogin">
+      <div>
         <lable for="email"> Email </lable>
-        <input
+        <Input
           v-model="emailInput"
           name="email"
-          id="email"
-          type="email"
+          class="flex bg-white"
+          input-type="email"
           required
-          placeholder="Email"
+          input-placeholder="Email"
         />
       </div>
       <div>
         <label>Password</label>
-        <input
+        <Input
           v-model="passwordInput"
-          type="password"
-          id="password"
-          class="password"
+          name="password"
+          class="flex bg-white"
+          input-type="password"
+          input-placeholder="Password"
           required
-          placeholder="Password"
         />
       </div>
-      <button type="submit">Sign in</button>
+      <Button class="bg-gradient-to-r from-cyan-400 to-pink-300 py-1 px-2 w-full !font-semibold" button-type="submit">Sign in</Button>
     </form>
   </section>
 </template>
-
-<style scoped>
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-}
-
-.Login-formEmail {
-  margin: 2rem;
-}
-#password,
-#email {
-  display: flex;
-}
-
-</style>

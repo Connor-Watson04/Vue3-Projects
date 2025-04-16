@@ -1,6 +1,11 @@
 <template>
   <div class="flex items-center gap-2 !mb-2">
-    <Button type="button" class="bg-gray-200 rounded-lg p-1" @click="chosenQuantity--">
+    <Button 
+    type="button" 
+    class="!bg-none !bg-gray-300 rounded-lg !p-1" 
+    v-model="chosenQuantity"
+   @click="() => { chosenQuantity--; emitQuantity(); }"
+   >
       <MinusIcon />
     </Button>
     <input
@@ -10,7 +15,12 @@
     v-model="chosenQuantity"
     @change="emitQuantity"
     />
-    <Button type="button" class="bg-gray-200 rounded-lg p-1" @click="chosenQuantity++">
+    <Button 
+    type="button" 
+    class="!bg-none !bg-gray-300 rounded-lg !p-1" 
+    v-model="chosenQuantity"
+   @click="() => { chosenQuantity++; emitQuantity(); }"
+    >
       <PlusIcon />
     </Button>
   </div>
@@ -24,6 +34,7 @@ import MinusIcon from '../Reuseable/icons/minusIcon.vue'
 import PlusIcon from '../Reuseable/icons/plusIcon.vue'
 
 const chosenQuantity = ref(0)
+
 
 const emit = defineEmits(['update:quantity'])
 

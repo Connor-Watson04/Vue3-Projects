@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { basketState } from '../../composables/basketState'
 import { useBasket } from '@/composables/useBasket'
 import { useToast } from 'vue-toastification'
+
+
 import removeConfirmation from '@/components/Reuseable/removeConfirmation.vue' // Import the reusable popup
+import closeIcon from '../Reuseable/icons/closeIcon.vue'
+import Text from '../Reuseable/Text.vue'
+import Button from '../Reuseable/Button.vue'
 
 const toast = useToast()
 const { basket } = basketState()
@@ -41,14 +47,16 @@ const confirmDelete = () => {
 </script>
 
 <template>
-   <main class="basketContainer" @animationend="$emit('animationend')"
+   <main class="basketContainer text-black h-[90vh] w-[350px] shadow-xl !bg-white select-none overflow-y-scroll" @animationend="$emit('animationend')"
         :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }">
-    <span class="basketHeading">
-      <h1 class="basketTitle">Your Basket</h1>
-      <button class="closeBasket" @click="closeBasket">Close</button>
+        <span class="bg-white flex w-full items-center !border-b-1 sticky top-[0px] z-10 py-[10px] px-[1rem]">
+      <h1 class="text-[40px] w-full">Your Basket</h1>
+      <button @click="closeBasket">
+        <closeIcon/>
+      </button>
     </span>
-  <section class="basketContainer">
-    <div>
+  <section class="h-[70vh] overflow-y-scroll scroll-smooth">
+    <div class="h-full">
       <div v-if="basket.length > 0" class="basketProduct-container">
         <div v-for="(product, index) in basket" :key="index" class="basketProduct">
             <img :src="product.image" class="basketImage" alt="Product Image" />
@@ -82,8 +90,20 @@ const confirmDelete = () => {
           @confirm="confirmDelete"/>
         </div>
       </div>
-      <div v-else>
-        <h2 class="emptyBasket">Empty Basket</h2>
+      <div v-else class="h-full flex flex-col items-center justify-center px-10 gap-2">
+        <h1 class="text-2xl text-black/50 !font-semibold">Your Basket is Empty</h1>
+        <Text class="!text-black/50 text-sm">
+          Continue shopping and add items to your basket to view them here.
+        </Text>
+        <RouterLink to="/product" class="p-0">
+          <Button 
+          class="!font-semibold"
+          buttonType="button" 
+          @click="closeBasket()" 
+          >
+            Go Shopping
+        </Button>
+      </RouterLink>
       </div>
     </div>
   </section>
@@ -95,16 +115,6 @@ const confirmDelete = () => {
 </template>
 
 <style scoped>
-.basketContainer {
-  color: black;
-  height: 90vh;
-  width: 350px;
-  box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 100);
-  background-color: white;
-  user-select: none;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-}
 
 /* Slide-in animation */
 @keyframes slideIn {
@@ -132,34 +142,6 @@ const confirmDelete = () => {
 
 .basketContainer.slide-out {
   animation: slideOut 0.3s forwards;
-}
-
-.basketHeading {
-  background-color: white;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  border-bottom: 1px solid black;
-  position: sticky;
-  top: 0px; /* Stick the heading at the top */
-  z-index: 10; /* Ensure it stays on top of other content */
-  padding: 10px 1rem; /* Add some padding for better appearance */
-}
-
-.basketTitle {
-  font-size: 40px;
-  width: 100%;
-}
-
-.closeBasket {
-  border: 1.5px solid black;
-  background-color: rgba(255, 63, 63, 0.653);
-  font-size: 16px;
-  height: 30px;
-}
-
-.closeBasket:active {
-  transform: translateY(3px);
 }
 
 .emptyBasket {

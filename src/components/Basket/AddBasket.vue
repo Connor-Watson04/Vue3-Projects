@@ -4,9 +4,9 @@
     <ProductSizes v-model:size="selectedSize" />
     <ProductQuantity v-model:quantity="chosenQuantity" />
     <div class="mt-2">
-      <button class="bg-green-400 border border-black px-4 py-2 cursor-pointer rounded-md hover:bg-green-500 active:translate-y-1 transition">
+      <Button class="rounded-lg border-1">
         Add to basket
-      </button>
+      </Button>
     </div>
   </form>
 </template>
@@ -17,6 +17,8 @@ import ProductSizes from '@/components/Products/ProductSizes.vue'
 import ProductQuantity from '@/components/Products/ProductQuantity.vue'
 import { basketState } from '../../composables/basketState'
 import { useToast } from 'vue-toastification'
+
+import Button from '../Reuseable/Button.vue'
 
 const toast = useToast()
 

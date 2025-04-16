@@ -32,7 +32,7 @@ defineProps({
                     >
                     More Info
                     </router-link>
-                    <AddMobileBasket :image="image" :name="name" :Price="Price" />
+                    <AddMobileBasket :image="Product.image" :name="Product.name" :price="Product.Price" />
                 </div>
             </div>
         </div>

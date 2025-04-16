@@ -48,9 +48,9 @@ function closeSearchBar() {
 
 watch(isSearch, (newVal) => {
   if (newVal) {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
   } else {
-    document.body.style.overflow = '';
+    document.body.style.overflowY = '';
   }
 });
 
@@ -87,11 +87,11 @@ function handleSearch() {
             />
           </div>
         </form>    
-        <div class="h-[3px] w-5/6 bg-gray-600"></div>
+        <div class="!h-[3px] w-5/6 bg-gray-600"></div>
   <div class="flex flex-row items-center justify-center w-full h-full gap-2">
     <div v-if="isMobile" >
     <form @submit.prevent="handleSearch">
-      <Button @click="displaySearchBar" v-if="!isSearch" buttonType="button">
+      <Button @click="displaySearchBar" v-if="!isSearch" class="bg-none border-none !py-0 !px-0" buttonType="button">
         <Text>Search</Text>
       </Button>
     </form>
@@ -110,59 +110,24 @@ function handleSearch() {
       <div class="top-0 z-[100] w-full h-[110vh] bg-black/75" @click="closeSearchBar"/>
       </div>
   
-      <div 
-    v-show="isBasketVisible || isAnimating" 
-    class="basket-tray" 
-    >
-    <div
+    <div v-show="isBasketVisible || isAnimating" class="h-[100vh] absolute right-[0px] w-full flex justify-end z-[100]">
+      <div
       v-show="isBasketVisible || isAnimating" 
-      class="basket-cover" 
+      class="h-full w-full absolute z-0 bg-[#00000066]" 
       @click="closeBasket"
       :class="{'fade-in': isBasketVisible, 'fade-out': !isBasketVisible}" 
       />
       <BasketTray
-    v-if="isAnimating || isBasketVisible"
-    @closeBasket="closeBasket"
-    :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
-    @animationend="handleAnimationEnd"
-  />
+      v-if="isAnimating || isBasketVisible"
+      @closeBasket="closeBasket"
+      :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }"
+      @animationend="handleAnimationEnd"
+      />
     </div>
-
   </section>
 </template>
 
 <style>
-.basket-btn {
-  background: none;
-  border: none;
-  color: var(--color-text);
-  border-right: 1px solid var(--color-border);
-  padding: 0 1rem;
-  font-size: 16px;
-}
-.basket-btn:hover {
-  background-color: var(--color-link-foreground);
-  cursor: pointer;
-}
-
-.basket-cover {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.basket-tray {
-  position: absolute;
-  right: 0px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: right;
-  z-index: 100;
-}
-
 /* Slide-in animation */
 @keyframes slideIn {
   0% {

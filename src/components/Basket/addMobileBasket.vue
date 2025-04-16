@@ -22,10 +22,10 @@
   
   // Get product data
   const props = defineProps({
-    name: String,
-    Price: Number,
-    image: String
-  })
+  name: String,
+  price: Number,
+  image: String
+})
   
   // Access the basket and addProduct function from shared state
   const { addProduct } = basketState() // Assuming `basket` is an array that stores products
@@ -35,7 +35,7 @@
   const chosenQuantity = ref(0)
   
   const quantityPrice = computed(() => {
-    const addedPrice = props.Price * chosenQuantity.value
+    const addedPrice = props.price * chosenQuantity.value
     return addedPrice.toFixed(2)
   })
   
