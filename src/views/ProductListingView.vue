@@ -49,7 +49,7 @@ const searchQuery = computed(() => route.query.search || '')
     <MobileProduct v-if="isMobile" :Products="Products" class="flex flex-col gap-2" />
   </div>
   <div v-else>
-    <Text class="!text-3xl !mb-2">
+    <Text class="!text-3xl text-center !mb-2">
       All Stock
     </Text>
     <DesktopProducts v-if="!isMobile" :Products="Products" />

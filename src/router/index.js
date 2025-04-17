@@ -29,6 +29,16 @@ const router = createRouter({
       component: AccountView
     },
     {
+      path: '/Account/Dashboard',
+      name: 'Account-Dashboard',
+      component: AccountView
+    },
+    {
+      path: '/Account/My-Orders',
+      name: 'Account-My-Orders',
+      component: AccountView
+    },
+    {
       path: '/product/:URL', // Dynamic segment for product link
       name: 'Product details',
       component: ProductDetailsView,

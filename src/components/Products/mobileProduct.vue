@@ -12,7 +12,7 @@ defineProps({
 <template>
     <section class="px-2">
         <div v-for="Product in Products.Product" :key="Product.name" >
-            <div class="bg-white flex flex-row shadow-lg w-full h-[225px] rounded-2xl overflow-hidden text-black">
+            <div class="bg-white flex flex-row shadow-lg w-full h-auto py-2 rounded-2xl overflow-hidden text-black">
                 <router-link
                 class="w-1/2 flex items-center justify-center"
                 :to="{ name: 'Product details', params: { URL: Product.URL } }"
@@ -32,6 +32,10 @@ defineProps({
                     >
                     More Info
                     </router-link>
+                    <span class="flex flex-row gap-2 items-center">
+                        <Text class="line-through decoration-red-500 text-sm decoration-[2px]">£{{ Product.OGP }}</Text>
+                        <Text class="!text-black !font-semibold !text-start">£{{ Product.Price }}</Text>
+                    </span>
                     <AddMobileBasket :image="Product.image" :name="Product.name" :price="Product.Price" />
                 </div>
             </div>

@@ -177,20 +177,22 @@ onBeforeUnmount(() => {
         @navigate="handleNavClick"
         />
       </div>
-      <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col py-4 px-2">
+      <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col p-4">
         <h1 class="text-center text-stable text-lg text-black !font-semibold !mb-2">{{ product.Title }}</h1>
-        <div class="flex flex-col px-4">
-          <Text>Free Shipping</Text>
-          <div class="flex flex-row gap-2">
-            <p class="line-through decoration-red-500 decoration-[2px]">£{{ product.OGP }}</p>
-            <p class="text-lg !font-semibold">£{{ product.Price }}</p>
+        <div class="flex flex-row justify-between px-2">
+          <div>
+            <Text>Free Shipping</Text>
+            <div class="flex flex-row gap-2">
+              <p class="line-through decoration-red-500 decoration-[2px]">£{{ product.OGP }}</p>
+              <p class="text-lg !font-semibold">£{{ product.Price }}</p>
+            </div>
           </div>
-          <AddBasket :URL="product.URL" :name="product.name" :Price="product.Price" />
+          <AddBasket :URL="product.URL" :name="product.name" :image="product.image" :Price="product.Price" />
         </div>
       </div>
         <button @click="openSpecifications" class="flex flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
           Specifications
-          <ArrowIcon class="rotate-270"/>
+          owIcon class="rotate-270"/>
         </button>
       </div>
       <div class="p-4">

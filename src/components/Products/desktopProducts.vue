@@ -32,6 +32,7 @@ defineProps({
                     >
                     More Info
                     </router-link>
+                  <Text class="!text-black !text-start">£{{ Product.Price }}</Text>
                     <AddMobileBasket :image="image" :name="name" :Price="Price" />
                 </div>
             </div>
