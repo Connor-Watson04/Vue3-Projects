@@ -9,7 +9,6 @@ const toast = useToast()
 const emit = defineEmits(['closed', 'email-updated'])
 
 const isVisible = ref(true)
-const currentEmail = ref(localStorage.getItem('email') || '')
 const confirmCurrentEmail = ref('')
 const newEmail = ref('')
 

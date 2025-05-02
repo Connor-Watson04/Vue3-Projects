@@ -1,4 +1,6 @@
 <script setup>
+import Text from '../Reuseable/Text.vue';
+
 const props = defineProps({
   URL: String,
   name: String,
@@ -9,33 +11,14 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="orderTable">
-    <img :src="`${props.URL}`" />
+  <div class="flex h-[100px]">
+    <img class="h-full" :src="`${props.URL}`" />
     <div>
-      <p>Ordered: {{ props.date }}</p>
-      <span>
-        <p>{{ props.name }}</p>
-        <p>{{ props.Price }}</p>
-      </span>
+      <Text class="text-[var(-color-text)]">Ordered: {{ props.date }}</Text>
+      <div class="flex gap-[5px]">
+        <Text class="text-[var(-color-text)]">{{ props.name }}</Text>
+        <Text class="text-[var(-color-text)]">{{ props.Price }}</Text>
+      </div class="flex gap-[5px]">
     </div>
   </div>
 </template>
-
-<style scoped>
-p {
-  color: var(--color-text);
-}
-
-.orderTable {
-  display: flex;
-}
-
-img {
-  height: 100px;
-}
-
-span {
-  display: flex;
-  gap: 5px;
-}
-</style>

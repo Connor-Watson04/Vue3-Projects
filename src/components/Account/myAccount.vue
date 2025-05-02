@@ -36,7 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="accountOverview">
+  <div class="text-[var(--color-text-alt)]">
     <h2 class="accountName">Welcome Back {{ accountName }}!</h2>
 
     <H1>Account Overview</H1>
@@ -71,9 +71,3 @@ onMounted(() => {
 />
   <ChangePasswordTray v-if="activeTray === 'password'" @close="activeTray = null" @password-updated="password = $event"/>
 </template>
-
-<style scoped>
-.accountOverview {
-  color: var(--color-text-alt);
-}
-</style>

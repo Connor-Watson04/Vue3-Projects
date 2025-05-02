@@ -8,7 +8,7 @@
         v-if="isOpen"
         class="absolute w-full text-black right-0 w-full origin-top-right bg-white border-2 border-black text-lg shadow-lg z-50"
         >
-            <slot/>
+            <slot :close="closeDropdown"/>
         </div>
     </div>
 </template>
@@ -28,6 +28,10 @@ const isOpen = ref(false)
 
 function toggleDropdown() {
     isOpen.value = !isOpen.value
+}
+
+function closeDropdown() {
+    isOpen.value = false
 }
 
 </script>

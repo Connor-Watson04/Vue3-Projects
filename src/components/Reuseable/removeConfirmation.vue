@@ -1,22 +1,20 @@
 <template>
     <section
       v-if="visible"
-      :class="['logOutConfirm', mode === 'inline' ? 'inlineConfirm' : 'fullscreenConfirm']"
+      :class="['flex justify-center items-center', mode === 'inline' ? 'h-full w-full absolute block' : 'bg-black/50 w-full h-full z-999 top-0 absolute']"
       @click.self="emitClose"
     >
-      <div :class="['logOutForm', mode === 'inline' ? 'inlineForm' : 'fullscreenForm']">
+      <div :class="['bg-white text-black border-[1px] p-[20px] flex flex-col justify-center items-center shadow-lg', mode === 'inline' ? 'h-full w-full absolute z-1000 rounded-none' : 'w-[30%] h-[20%] min-w-[250px] relative bottom-[100px]']">
         <p>{{ message }}</p>
-        <div class="confirmationButtons">
-          <button class="logOutFormButton" @click="emitClose">No</button>
-          <button class="logOutFormButton yesButton" @click="emitConfirm">Yes</button>
+        <div class="!mt-[10px] flex gap-[15px]">
+          <button class="rounded-[10px] py-[5px] px-[25px]" @click="emitClose">No</button>
+          <button class="rounded-[10px] py-[5px] px-[25px] bg-red-600" @click="emitConfirm">Yes</button>
         </div>
       </div>
     </section>
-  </template>
-  
-  
-  
-  <script setup>
+</template>
+    
+<script setup>
   import { watch } from 'vue'
   
   const props = defineProps({
@@ -48,79 +46,4 @@
       document.body.style.overflow = val ? 'hidden' : ''
     }
   })
-  </script>
-  
-
-  <style>
-.logOutConfirm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.fullscreenConfirm{
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  top: 0px;
-  position: absolute;
-}
-
-.inlineConfirm{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    display: block;
-}
-
-
-
-/* Shared styles for both modes */
-.logOutForm {
-    background-color: white;
-  color: black;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Fullscreen version (Account page) */
-.fullscreenForm {  width: 30%;
-  min-width: 250px;
-  height: 20%;
-  position: relative;
-  bottom: 100px;
-}
-
-/* Inline version (Basket tray) */
-.inlineForm {
-height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 1000;
-  border-radius: 0;
-}
-
-
-.confirmationButtons {
-  margin-top: 10px;
-  display: flex;
-  gap: 15px;
-}
-
-.logOutFormButton {
-  border-radius: 10px;
-  padding: 5px 25px;
-}
-
-.yesButton {
-  background-color: rgba(249, 45, 45, 0.858);
-}
-
-</style>
+</script>

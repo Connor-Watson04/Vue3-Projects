@@ -14,17 +14,15 @@ import Spinner from '@/components/Reuseable/Spinner.vue'
 import Text from '@/components/Reuseable/Text.vue'
 
 
-let showMyOrders = ref(false)
-let showMyAccount = ref(true)
-let logOutPopUp = ref(false)
-
 const isMobile = useIsMobile()
 const { setAccountStatus } = useAccountStatus()
 const router = useRouter()
-let currentMenu = ref('My Account')
-
 
 const isLoading = ref(true)
+const showMyOrders = ref(false)
+const showMyAccount = ref(true)
+const logOutPopUp = ref(false)
+const currentMenu = ref('My Account')
 
 setTimeout(() => {
   isLoading.value = false
@@ -33,6 +31,7 @@ setTimeout(() => {
 function setCurrentMenu(menuName) {
   currentMenu.value = menuName
 }
+
 
 const toggleMyOrders = () => {
   showMyOrders.value = true
@@ -43,6 +42,8 @@ const toggleMyAccount = () => {
   showMyAccount.value = true
   showMyOrders.value = false
 }
+
+
 
 const displayPopUp = () => {
   logOutPopUp.value = true
@@ -58,6 +59,7 @@ const handleLogOut = () => {
 const closeLogOut = () => {
   logOutPopUp.value = false
 }
+
 </script>
 
 <template>
@@ -77,11 +79,11 @@ const closeLogOut = () => {
       </section>
 
     <section v-if="isMobile">
-    <menuDropdown :buttonText="currentMenu" class="w-full">
-      <RouterLink to="/Account/Dashboard"  @click.prevent="() => { setCurrentMenu('My Account'); toggleMyAccount(); }" class="block px-4 py-2 hover:bg-gray-100">
+    <menuDropdown :buttonText="currentMenu" class="w-full" v-slot="{close}">
+      <RouterLink to="/Account/Dashboard"  @click.prevent="() => { setCurrentMenu('My Account'); toggleMyAccount(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
         My Account
       </RouterLink>
-      <RouterLink to="/Account/My-Orders" @click.prevent="() => { setCurrentMenu('My Orders'); toggleMyOrders(); }" class="block px-4 py-2 hover:bg-gray-100">
+      <RouterLink to="/Account/My-Orders" @click.prevent="() => { setCurrentMenu('My Orders'); toggleMyOrders(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
         My Orders
       </RouterLink>
       <button

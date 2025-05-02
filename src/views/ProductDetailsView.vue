@@ -192,7 +192,7 @@ onBeforeUnmount(() => {
       </div>
         <button @click="openSpecifications" class="flex flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
           Specifications
-          owIcon class="rotate-270"/>
+          <ArrowIcon class="rotate-270"/>
         </button>
       </div>
       <div class="p-4">

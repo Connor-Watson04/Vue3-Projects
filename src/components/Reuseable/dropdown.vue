@@ -1,24 +1,3 @@
-<template>
-    <div class="w-full" v-bind="$attrs">
-      <div @click="toggleMenu" class="p-2 justify-between flex flex-row items-center cursor-pointer">
-        <Text class="!text-start">
-          {{ message }}
-        </Text>
-        <button class="transition-transform duration-300 ease-in-out">
-          <arrowIcon :class="['transform transition-transform duration-300', isOpen ? 'rotate-180' : 'rotate-0']" />
-        </button>
-      </div>
-  
-      <Transition name="dropdown">
-        <div v-if="isOpen" class="p-4 origin-top border-t">
-          <slot />
-        </div>
-      </Transition>
-    </div>
-  </template>
-  
-  
-
 <script setup>
 import { ref } from 'vue';
 
@@ -41,6 +20,25 @@ const toggleMenu = () => {
 
 
 </script>
+
+<template>
+    <div class="w-full" v-bind="$attrs">
+      <div @click="toggleMenu" class="p-2 justify-between flex flex-row items-center cursor-pointer">
+        <Text class="!text-start">
+          {{ message }}
+        </Text>
+        <button class="transition-transform duration-300 ease-in-out">
+          <arrowIcon :class="['transform transition-transform duration-300', isOpen ? 'rotate-180' : 'rotate-0']" />
+        </button>
+      </div>
+  
+      <Transition name="dropdown">
+        <div v-if="isOpen" class="p-4 origin-top border-t">
+          <slot />
+        </div>
+      </Transition>
+    </div>
+</template>
 
 <style scoped>
 .dropdown-enter-active,
