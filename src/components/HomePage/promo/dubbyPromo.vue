@@ -4,7 +4,7 @@
       <h1 class="text-center text-xl text-[var(--color-dubby)] !font-bold text-shadow-md z-10">
         DUBBY Products
       </h1>
-      <img src="/src/assets/Images/promos/promo.png" />
+      <img class="tab:h-1/2" src="/src/assets/Images/promos/promo.png" />
       <div class="text-center mt-4">
         <a
           class="relative text-[var(--color-dubby)] bg-[var(--color-promo)] px-6 py-4 rounded-lg inline-block transition-transform duration-150 hover:-translate-y-[1px] hover:bg-gray-700 active:translate-y-[2px] active:bg-gray-900"

@@ -10,7 +10,7 @@
       </h1>
     </div>
 
-    <HomePageCards :Products="Products" class="flex flex-col gap-3 !my-4"/>
+    <HomePageCards :Products="Products"/>
 
     <div class="flex justify-center items-center mt-8">
       <RouterLink

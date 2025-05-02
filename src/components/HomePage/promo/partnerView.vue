@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen">
+  <div class="flex flex-col w-screen tab:px-10 tab:items-center tab:justify-center">
     <welcome />
     <DubbyPromo />
   </div>

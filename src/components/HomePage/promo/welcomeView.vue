@@ -1,16 +1,14 @@
 <template>
   <div class="box-border overflow-hidden text-white p-8 w-full bg-[var(--color-promo)] rounded-xl shadow-[var(--box-shadow)] !mb-5">
     <h1 class="text-2xl font-bold">Welcome to S-I-S SQUAD Merch Line</h1>
-    <p class="mt-4">
+    <p class="mt-4 tab:!mb-2">
       Here at S-I-S SQUAD we decided to provide you with some <strong>DRIPPY</strong> merch. <br />
       We figured we enjoy content creation so much why not give back to our squad.
-    </p>
-    <p class="mt-4">
+      <br />
       We managed to find ourselves a great partnership with
       <a href="https://www.dubby.gg/discount/MidN1ght?ref=spB4fv3CyQJAij" class="font-bold underline text-[var(--color-dubby)]">DUBBY</a>,
       who provide powdered-based energy drinks to your door for cheaper than their competitors.
-    </p>
-    <p class="mt-4">
+      <br />
       You can use Code S-I-S SQUAD at checkout for 10% off. (This is auto-applied in the link)
     </p>
     
