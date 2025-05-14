@@ -1,5 +1,6 @@
 <script setup>
 import Text from '../Reuseable/Text.vue';
+import Image from '../Reuseable/Image.vue';
 
 const props = defineProps({
   URL: String,
@@ -12,7 +13,7 @@ const props = defineProps({
 
 <template>
   <div class="flex h-[100px]">
-    <img class="h-full" :src="`${props.URL}`" />
+    <Image class="h-full" :imageSrc="`${props.URL}`" />
     <div>
       <Text class="text-[var(-color-text)]">Ordered: {{ props.date }}</Text>
       <div class="flex gap-[5px]">

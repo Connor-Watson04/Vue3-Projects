@@ -1,12 +1,15 @@
 <template>
     <div class="min-w-[250px] snap-start">
-      <img :src="conceptToy.image" :alt="conceptToy.name" class="h-[500px] w-full object-cover" />
+      <Image :imageSrc="conceptToy.image" :imageAlt="conceptToy.name" class="h-[500px] w-full object-cover" />
     </div>
   </template>
   
-  <script setup>
+<script setup>
+  import Image from '@/components/Reuseable/Image.vue';
+
+
   defineProps({
     conceptToy: Object
   });
-  </script>
+</script>
   

@@ -11,6 +11,7 @@ import closeIcon from '../Reuseable/icons/closeIcon.vue'
 import Text from '../Reuseable/Text.vue'
 import Button from '../Reuseable/Button.vue'
 import DeleteIcon from '../Reuseable/icons/deleteIcon.vue'
+import Image from '../Reuseable/Image.vue'
 
 const toast = useToast()
 const { basket } = basketState()
@@ -60,7 +61,7 @@ const confirmDelete = () => {
     <div class="h-full">
       <div v-if="basket.length > 0" class="basketProduct-container">
         <div v-for="(product, index) in basket" :key="index" class="hover:bg-[#d6d6d6] pt-2 flex justify-evenly border-1 border-black h-[20vh] !my-[5px] overflow-hidden relative">
-            <img :src="product.image" class="h-[20vh] w-auto" alt="Product Image" />
+            <Image :imageSrc="product.image" class="h-[20vh] w-auto" imageAlt="Product Image" />
             <div>
               <p>{{ product.name }}</p>
               <p>Size: {{ product.size }}</p>

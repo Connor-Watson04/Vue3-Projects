@@ -3,11 +3,10 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Products from '@/products.json'
-import DesktopProducts from '@/components/Products/desktopProducts.vue'
-import MobileProduct from '@/components/Products/mobileProduct.vue'
 import { useIsMobile } from '@/composables/useMobile'
 import Text from '@/components/Reuseable/Text.vue'
-const isMobile = useIsMobile()
+import ProductCard from '@/components/Products/ProductCard.vue'
+const {isMobile} = useIsMobile()
 
 const route = useRoute()
 
@@ -35,8 +34,7 @@ const searchQuery = computed(() => route.query.search || '')
         {{ searchQuery }}
       </span>
     </h1>
-    <DesktopProducts v-if="!isMobile" :Products="filterProducts" />
-    <MobileProduct v-if="isMobile" :Products="filterProducts" class="flex flex-col gap-2" />
+    <ProductCard v-if="isMobile" :Products="filterProducts" class="flex flex-col gap-2" />
   </div>
 
   <div v-else-if="searchQuery && filterProducts.Product.length == 0">
@@ -45,14 +43,12 @@ const searchQuery = computed(() => route.query.search || '')
       <span>{{ searchQuery }}</span>
     </h1>
     <Text>Here is what we stock</Text>
-    <DesktopProducts v-if="!isMobile" :Products="Products" />
-    <MobileProduct v-if="isMobile" :Products="Products" class="flex flex-col gap-2" />
+    <ProductCard v-if="isMobile" :Products="Products" class="flex flex-col gap-2" />
   </div>
   <div v-else>
     <Text class="!text-3xl text-center !mb-2">
       All Stock
     </Text>
-    <DesktopProducts v-if="!isMobile" :Products="Products" />
-    <MobileProduct v-if="isMobile" :Products="Products" class="flex flex-col gap-2"/>
+    <ProductCard :Products="Products" class="flex flex-col gap-2 md:grid md:grid-cols-4 lg:grid-cols-5"/>
   </div>
 </template>

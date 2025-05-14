@@ -1,14 +1,6 @@
 @import './base.css';
 @import "tailwindcss";
 
-@theme {
- --breakpoint-ml: 30rem;
- --breakpoint-tab: 48rem;
- --breakpoint-sl: 62rem;
- --breakpoint-dt: 75rem;
- --breakpoint-ls: 100rem;
-}
-
 #app {
   font-weight: normal;
 }

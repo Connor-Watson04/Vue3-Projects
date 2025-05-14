@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import AddBasket from '../Basket/AddBasket.vue'
+import Image from '../Reuseable/Image.vue'
 
  defineProps({
   URL: String,
@@ -30,7 +31,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="flex flex-row bg-white shadow-lg w-full h-[200px] rounded-2xl overflow-hidden text-black">
     <div class="relative w-1/2">
-      <img class="h-full w-full" :src="image" :alt="name" />
+      <Image class="h-full w-full" :imageSrc="image" :imageAlt="name" />
       <h2 v-if="windowWidth > 675" class="text-center text-lg font-semibold">{{ name }}</h2>
     </div>
     <div class="py-1">

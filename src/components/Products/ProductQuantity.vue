@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-2 !mb-2 tab:!mt-1">
+  <div class="flex items-center gap-2 !mb-2 md:!mt-1">
     <Button 
     type="button" 
     class="!bg-none !bg-gray-300 rounded-lg !p-1" 
@@ -9,7 +9,7 @@
       <MinusIcon />
     </Button>
     <input
-    class="!px-1 h-full w-12 text-center text-xs text-black-700 border border-gray-300 rounded tab:py-2"
+    class="!px-1 h-full w-12 text-center text-xs text-black-700 border border-gray-300 rounded md:py-2"
     type="number"
     placeholder="0"
     v-model="chosenQuantity"

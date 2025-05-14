@@ -1,5 +1,11 @@
 <template>
-    <img v-if="imageSrc || placeHolderImg" :src="imageSrc || placeHolderImg" :alt="imageAlt || 'sis squad product image'" />
+    <img 
+    v-if="imageSrc || placeHolderImg" 
+    :src="imageSrc || placeHolderImg" 
+    :alt="imageAlt || 'sis squad image'" 
+    @load="$emit('load')" 
+    @error="$emit('error')"
+    />
 </template>
   
 

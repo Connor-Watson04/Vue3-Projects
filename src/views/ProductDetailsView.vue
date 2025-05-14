@@ -11,6 +11,7 @@ import Spinner from '@/components/Reuseable/Spinner.vue'
 import skeletonLoader from '@/components/Reuseable/skeletonLoader.vue'
 import SpecificationsTray from '@/components/Reuseable/specificationsTray.vue'
 import ArrowIcon from '@/components/Reuseable/icons/arrowIcon.vue'
+import Image from '@/components/Reuseable/Image.vue'
 
 const isLoading = ref(true)
 
@@ -33,6 +34,21 @@ const imageInterval = ref(null)
 
 // Fading state
 const isFading = ref(false)
+
+
+let imageAlreadyHandled = false
+
+function handleImageLoad() {
+  if (imageAlreadyHandled) return
+  imageAlreadyHandled = true
+
+  if (images.value.length > 1) {
+    startImageCycle()
+  }
+  nextTick(() => {
+    isLoading.value = false
+  })
+}
 
 const startImageCycle = (() => {
   clearInterval(imageInterval.value)
@@ -101,41 +117,32 @@ const openSpecifications = (() => {
   window.scrollTo(top)
 })
 
-onMounted(async () => {
+onMounted(() => {
   window.addEventListener('resize', updateWindowWidth)
-
   isLoading.value = true
 
-  // Simulate delay (optional)
-  setTimeout(async () => {
-    product.value = Products.Product.find(
+  setTimeout(() => {
+    const foundProduct = Products.Product.find(
       (p) => p.URL.trim().toLowerCase() === productURL
     )
 
-    if (product.value) {
-  images.value = [product.value.image]
-  if (product.value.image2) images.value.push(product.value.image2)
+    if (foundProduct) {
+      product.value = foundProduct
 
-  const img = new Image()
-  img.src = images.value[currentImageIndex.value]
+      images.value = [foundProduct.image]
+      if (foundProduct.image2) images.value.push(foundProduct.image2)
 
-  img.onload = async () => {
-    currentImage.value = images.value[currentImageIndex.value]
+      currentImage.value = images.value[currentImageIndex.value]
 
-    if (images.value.length > 1) {
-      startImageCycle()
+      // ✅ Done loading the product data — no need to wait for image
+      isLoading.value = false
+    } else {
+      // Handle not found, or redirect if needed
+      isLoading.value = false
     }
-
-    await nextTick() // Wait for DOM render after setting currentImage
-    isLoading.value = false
-  }
-
-  img.onerror = () => {
-    isLoading.value = false
-  }
-}
-  },500)
+  }, 500)
 })
+
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateWindowWidth)
@@ -164,11 +171,13 @@ onBeforeUnmount(() => {
       </div>
       
       <div class="bg-white rounded-xl h-[400px] w-full flex flex-col items-center justify-center">
-          <img
-          :src="currentImage"
+          <Image
+          :imageSrc="currentImage"
           class="block product-image max-h-[350px] h-full"
           :class="{ fade: isFading }"
-          :alt="product.name"
+          :imageAlt="product.name"
+          @load="handleImageLoad"
+          @error="handleImageError"
           />
         <sliderNav 
         v-if="!isMobile && images.length > 1"
