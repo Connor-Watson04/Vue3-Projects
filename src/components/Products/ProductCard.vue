@@ -1,12 +1,12 @@
 <template>
-  <section class="flex flex-col gap-3 md:flex-row !my-4 px-2 flex items-center md:place-self-end md:max-w-[1024px] lg:max-w-[1200px]">
-        <div v-for="(Product, index) in Products.Product" :key="index" >
-          <div class="bg-white flex flex-row shadow-lg w-full md:flex-col h-[225px] max-w-[500px] md:h-[450px] rounded-2xl overflow-hidden text-black">
+  <section class="flex flex-col gap-3 md:flex-row !my-4 px-2 flex items-center md:place-self-end md:max-w-[1024px] lg:max-w-[1240px]">
+        <div v-for="(Product, index) in Products.Product" :key="index" class="w-full flex items-center justify-center">
+          <div class="bg-white flex flex-row  shadow-lg w-full md:flex-col h-[225px] max-w-[500px] md:max-w-[650px] md:h-[450px] rounded-2xl overflow-hidden text-black">
             <router-link
-            class="w-1/2 h-auto md:h-1/2 flex items-center justify-center md:w-full sm:max-h-[250px] sm:max-w-[250px]"
+            class="w-1/2 h-auto md:h-1/2 flex items-center justify-center md:w-full sm:max-h-[250px]"
             :to="{ name: 'Product details', params: { URL: Product.URL } }"
             >
-              <Image :imageSrc="Product.image" :imageAlt="Product.name" class="w-full h-full" />
+              <Image :imageSrc="Product.image" :imageAlt="Product.name" class="w-full h-full sm:max-w-[250px]" />
             </router-link>
             <div class="flex flex-col justify-center md:p-2">
               <h1 class="text-start text-base !font-bold">

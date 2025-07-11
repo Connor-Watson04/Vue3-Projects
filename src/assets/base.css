@@ -86,6 +86,10 @@
     --color-dubby: var(--vt-c-dubby);
     --color-button: var(--vt-c-button-dark);
     --color-button-hover: var(--vt-c-button-dark-hover);
+
+    /* Colours */
+    --cyan-default: oklch(78.9% 0.154 211.53);
+    --pink-default: oklch(71.8% 0.202 349.761);
   }
 }
 

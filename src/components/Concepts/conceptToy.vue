@@ -1,13 +1,17 @@
 <script setup>
 import { onMounted } from 'vue';
+import { useIsMobile } from '@/composables/useMobile';
 import { useSliderNav } from '@/composables/useSliderNav';
 import Slider from "../Reuseable/Slider.vue";
 import toyView from "./Toys/toyView.vue";
 import SliderNav from "../Reuseable/sliderNav.vue";
 import concepts from "@/concepts.json";
+import ArrowIcon from '../Reuseable/icons/arrowIcon.vue';
 
 // Extract the Toys array from the JSON
 const Toys = concepts.Concepts.Toys;
+
+const {windowWidth} = useIsMobile()
 
 const {
   sliderRef,
@@ -29,17 +33,18 @@ onMounted(() => {
     <div class="w-full">
       <Slider ref="sliderRef">
         <div
-          v-for="(toy, index) in Toys"
-          :key="toy.name + index"
-          :id="'slide-' + index"
-          class="snap-center flex flex-row justify-center items-center min-w-[100%] h-[500px]"
+        v-for="(toy, index) in Toys"
+        :key="toy.name + index"
+        :id="'slide-' + index"
+        class="snap-center sm:snap-none shrink-0 flex flex-row justify-center items-center place-items-center w-full sm:w-[300px] h-[500px]"
         >
-          <toyView :conceptToy="toy" />
-        </div>
+        <toyView :conceptToy="toy" />
+      </div>
       </Slider>     
     </div>
   </div>
     <SliderNav 
+    v-if="windowWidth <= 767"
       class="flex justify-center items-center"
       :count="Toys.length"
       :active="activeIndex"

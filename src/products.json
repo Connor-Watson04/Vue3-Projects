@@ -1,7 +1,7 @@
 {
   "Product": [
     {
-      "Title":"N1ghtW0lf04 classic unisex fit, premium cotton hoodie",
+      "Title":"N1ghtW0lf04 classic unisex fit",
       "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-White-back-rounded.png?raw=true",
       "image2": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-Black-back-rounded.png?raw=true",
       "URL": "n1ghtw0lf04-hoodie",
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "Title": "JellyBellyYT regular unisex fit, organic cotton hoodie, recyled polyester",
+      "Title": "JellyBellyYT regular unisex fit",
       "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/JellyBellyyt-eco-hoodie.png?raw=true",
       "URL": "jellybellyyt-hoodie",
       "name": "JellyBellyYT Hoodie",
@@ -51,7 +51,7 @@
         "Do not dry clean"
     ],
     "Specifications": {
-      "Weight": "280 grams",
+      "Weight": "280g",
       "Material": [ 
         "80% organic cotton",
         "20% recycled polyester"

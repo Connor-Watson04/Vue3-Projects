@@ -1,7 +1,7 @@
 // composables/useIsMobile.js
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 
-export function useIsMobile(breakpoint = 767) {
+export function useIsMobile(breakpoint = 1023) {
   const windowWidth = ref(window.innerWidth)
 
   function updateWindowWidth() {

@@ -164,13 +164,16 @@ onBeforeUnmount(() => {
       </skeletonLoader>
   </section>
   <SpecificationsTray v-if="openTray" :Specifications="product.Specifications" @close="openTray = false" class="z-999" />
-  <section v-if="product && !isLoading">
-    <div class="flex flex-col items-center justify-center px-2 gap-2">
-      <div class="w-full text-center bg-black/50">
+  <section v-if="product && !isLoading" class="flex flex-col gap-2 h-full px-2">
+
+      <div class="w-full text-center bg-black/50 place-self-center max-w-[500px] md:max-w-[1000px]">
         <h1 class="text-white !font-bold text-2xl">{{ product.name }}</h1>
       </div>
-      
-      <div class="bg-white rounded-xl h-[400px] w-full flex flex-col items-center justify-center">
+
+    <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+      <div class="w-full flex flex-col gap-2 md:w-1/2 max-w-[500px]">
+        
+        <div class="bg-white rounded-xl h-[400px] w-full flex flex-col items-center justify-center">
           <Image
           :imageSrc="currentImage"
           class="block product-image max-h-[350px] h-full"
@@ -179,14 +182,26 @@ onBeforeUnmount(() => {
           @load="handleImageLoad"
           @error="handleImageError"
           />
-        <sliderNav 
-        v-if="!isMobile && images.length > 1"
-        :count="images.length"
-        :active="currentImageIndex"
-        @navigate="handleNavClick"
-        />
+          <sliderNav 
+          v-if="!isMobile && images.length > 1"
+          :count="images.length"
+          :active="currentImageIndex"
+          @navigate="handleNavClick"
+          />
+        </div>
+        <div v-if="windowWidth  >= 768" class="flex flex-col justify-center w-full px-2 text-white/85">
+        <h1 class="text-3xl  w-full  !font-bold max-w-[500px] place-self-center">
+          Description:
+        </h1>
+        <p class="!mb-2 text-sm !font-semibold max-w-[500px] place-self-center">{{ product.Desc }}</p>
+
+      <button @click="openSpecifications" class="flex max-w-[500px] flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
+        Specifications
+        <ArrowIcon class="rotate-270"/>
+      </button>
+    </div>
       </div>
-      <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col p-4">
+      <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col md:place-self-start p-4 md:w-1/2 md:h-full max-w-[500px]">
         <h1 class="text-center text-stable text-lg text-black !font-semibold !mb-2">{{ product.Title }}</h1>
         <div class="flex flex-row justify-between px-2">
           <div>
@@ -199,16 +214,18 @@ onBeforeUnmount(() => {
           <AddBasket :URL="product.URL" :name="product.name" :image="product.image" :Price="product.Price" />
         </div>
       </div>
-        <button @click="openSpecifications" class="flex flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
-          Specifications
-          <ArrowIcon class="rotate-270"/>
-        </button>
-      </div>
-      <div class="p-4">
-        <h1 class="text-3xl text-white text-start !font-bold">
+    </div>
+    <div v-if="windowWidth  <= 767" class="flex justify-center w-full px-2 ">
+      <button @click="openSpecifications" class="flex max-w-[500px] flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
+        Specifications
+        <ArrowIcon class="rotate-270"/>
+      </button>
+    </div>
+      <div v-if="windowWidth  <= 767" class="flex flex-col w-full justify-center p-2 sm:py-4 sm:px-9">
+        <h1 class="text-3xl text-white w-full  !font-bold max-w-[500px] place-self-center">
           Description:
         </h1>
-        <p class="!mb-2 text-sm !font-semibold">{{ product.Desc }}</p>
+        <p class="!mb-2 text-sm !font-semibold max-w-[500px] place-self-center">{{ product.Desc }}</p>
       </div>
   </section>
 </template>

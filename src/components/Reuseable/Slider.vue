@@ -36,9 +36,29 @@
     slider.value.scrollLeft = scrollLeft - walk;
   };
   
-  const stopDrag = () => {
-    isDown = false;
-  };
+ const stopDrag = () => {
+  isDown = false;
+
+  const children = slider.value.children;
+  const sliderScrollLeft = slider.value.scrollLeft;
+  const containerWidth = slider.value.clientWidth;
+
+  let closest = 0;
+  let minDiff = Infinity;
+
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    const childOffsetLeft = child.offsetLeft;
+    const diff = Math.abs(childOffsetLeft - sliderScrollLeft);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = childOffsetLeft;
+    }
+  }
+
+  // Snap to closest slide
+  slider.value.scrollTo({ left: closest, behavior: 'smooth' });
+};
   </script>
   
   <style scoped>

@@ -49,6 +49,6 @@ const searchQuery = computed(() => route.query.search || '')
     <Text class="!text-3xl text-center !mb-2">
       All Stock
     </Text>
-    <ProductCard :Products="Products" class="flex flex-col gap-2 md:grid md:grid-cols-4 lg:grid-cols-5"/>
+    <ProductCard :Products="Products" class="flex flex-col gap-2 md:grid md:grid-cols-2 md:w-2/3 lg:grid-cols-3 lg:w-3/4 xl:grid-cols-4"/>
   </div>
 </template>

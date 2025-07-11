@@ -5,8 +5,7 @@ import { basketState } from '../../composables/basketState'
 import { useBasket } from '@/composables/useBasket'
 import { useToast } from 'vue-toastification'
 
-
-import removeConfirmation from '@/components/Reuseable/removeConfirmation.vue' // Import the reusable popup
+import removeConfirmation from '@/components/Reuseable/removeConfirmation.vue'
 import closeIcon from '../Reuseable/icons/closeIcon.vue'
 import Text from '../Reuseable/Text.vue'
 import Button from '../Reuseable/Button.vue'
@@ -82,14 +81,14 @@ const confirmDelete = () => {
           @confirm="confirmDelete"/>
         </div>
       </div>
-      <div v-else class="h-full flex flex-col items-center justify-center px-10 gap-2">
-        <h1 class="text-2xl text-black/50 !font-semibold">Your Basket is Empty</h1>
-        <Text class="!text-black/50 text-sm">
+      <div v-else class="h-full flex flex-col items-center justify-center px-8 gap-5">
+        <h1 class="text-3xl text-black/75 text-center !font-semibold">Your Basket is Empty</h1>
+        <Text class="!text-black/75 !font-semibold text-sm text-center">
           Continue shopping and add items to your basket to view them here.
         </Text>
         <RouterLink to="/product" class="p-0">
           <Button 
-          class="!font-semibold"
+          class="!font-semibold outline-2 outline-black active:outline-3"
           buttonType="button" 
           @click="closeBasket()" 
           >
@@ -101,7 +100,11 @@ const confirmDelete = () => {
   </section>
   <div class="sticky !b-0 w-full text-base bg-white py-[1.6rem] px-[1rem] border-t-1 border-[#ddd] flex justify-between items-center inset-shadow-sm inset-shadow-[#0000001a]">
     <p>Total: £{{ totalPrice.toFixed(2) }}</p>
-    <Button class="w-1/2">Checkout</Button>
+    <Button class="w-1/2 outline-2 outline-black" 
+    :disableButton="basket.length === 0"
+    >
+    Checkout
+  </Button>
   </div>
 </main>
 </template>

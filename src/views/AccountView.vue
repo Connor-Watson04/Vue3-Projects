@@ -14,7 +14,7 @@ import Spinner from '@/components/Reuseable/Spinner.vue'
 import Text from '@/components/Reuseable/Text.vue'
 
 
-const isMobile = useIsMobile()
+const { isMobile }= useIsMobile()
 const { setAccountStatus } = useAccountStatus()
 const router = useRouter()
 
@@ -72,30 +72,30 @@ const closeLogOut = () => {
     </skeletonLoader>
   </div>
   <main v-else class="flex flex-col md:flex-row gap-2 relative p-2">
+    <section v-if="isMobile">
+      <menuDropdown :buttonText="currentMenu" class="w-full" v-slot="{close}">
+        <RouterLink to="/Account/Dashboard"  @click.prevent="() => { setCurrentMenu('My Account'); toggleMyAccount(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
+          My Account
+        </RouterLink>
+        <RouterLink to="/Account/My-Orders" @click.prevent="() => { setCurrentMenu('My Orders'); toggleMyOrders(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
+          My Orders
+        </RouterLink>
+        <button
+          class="block w-full !text-rose-400 !font-semibold text-left px-4 py-2 border-t border-gray-200 hover:bg-rose-100"
+          @click="displayPopUp"
+        >
+          Sign Out
+        </button>
+      </menuDropdown>
+      </section>
       <section v-if="!isMobile" class="flex flex-row items-center md:flex-col gap-3">
-        <button class="rounded-full border-2 border-black bg-blue-500 py-2 px-4" @click="toggleMyAccount">My Account</button>
-        <button class="rounded-full border-2 border-black bg-blue-500 py-2 px-4" @click="toggleMyOrders">My Orders</button>
-        <button class="rounded-full border-2 border-black bg-rose-500 py-2 px-4" @click="displayPopUp">Sign Out</button>
+        <button class="py-2 px-4" @click="toggleMyAccount">My Account</button>
+        <button class="py-2 px-4" @click="toggleMyOrders">My Orders</button>
+        <button class="py-2 px-4" @click="displayPopUp">Sign Out</button>
       </section>
 
-    <section v-if="isMobile">
-    <menuDropdown :buttonText="currentMenu" class="w-full" v-slot="{close}">
-      <RouterLink to="/Account/Dashboard"  @click.prevent="() => { setCurrentMenu('My Account'); toggleMyAccount(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
-        My Account
-      </RouterLink>
-      <RouterLink to="/Account/My-Orders" @click.prevent="() => { setCurrentMenu('My Orders'); toggleMyOrders(); close(); }" class="block px-4 py-2 hover:bg-gray-100">
-        My Orders
-      </RouterLink>
-      <button
-        class="block w-full !text-rose-400 !font-semibold text-left px-4 py-2 border-t border-gray-200 hover:bg-rose-100"
-        @click="displayPopUp"
-      >
-        Sign Out
-      </button>
-    </menuDropdown>
-  </section>
     
-    <section class="overflow-hidden rounded-md p-[10px] w-full h-auto bg-[var(--color-background-mute)]">
+    <section class="overflow-hidden rounded-md p-[10px] w-full h-auto bg-[var(--color-background-mute)] max-w-[800px]">
       <myAccount v-if="showMyAccount" />
       <myOrders v-if="showMyOrders" :orderHistory="orderHistory" />
     </section>
