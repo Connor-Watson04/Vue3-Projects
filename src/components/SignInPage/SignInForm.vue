@@ -19,7 +19,7 @@ function toggleForm(showLogIn) {
 <template>
   <section class="flex flex-col lg:flex-row justify-center items-center !mb-[4rem] w-full px-5 ">
     <div class="w-full min-h-[200px] max-w-[500px] flex flex-col gap-8 items-center justify-center bg-[var(--color-promo)] !py-[2rem] lg:!pb-[4rem] rounded-[15px]"
-    :class="{'rounded-b-none': isMobile, 'rounded-r-none': !isMobile}"
+    :class="{'rounded-b-none': !isLogInVisible && isMobile, 'rounded-r-none': !isLogInVisible && !isMobile}"
     >
 
       <div class="flex justify-center items-center gap-[1rem] place-self-top">
