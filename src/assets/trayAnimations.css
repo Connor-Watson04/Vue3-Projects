@@ -1,0 +1,64 @@
+/* trayAnimations.css */
+
+/* Slide-in animation */
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Slide-out animation */
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+.slide-in {
+  animation: slideIn 0.8s forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.4s forwards;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Fade out */
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s forwards;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.fade-out {
+  animation: fadeOut 8s forwards;
+  background-color: rgba(0, 0, 0, 0);
+}

@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 import AddBasket from '../Basket/AddBasket.vue'
+import Image from '../Reuseable/Image.vue'
 
  defineProps({
   URL: String,
@@ -23,75 +24,32 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resie', updateWindowWidth)
+  window.removeEventListener('resize', updateWindowWidth)
 })
 </script>
 
 <template>
-  <div class="ProductCard">
-    <div class="image-container">
-      <img id="productCardImage" :src="`${image}`" :alt="name" />
-      <h2 v-if="windowWidth <= 375" class="ProductHeader">{{ name }}</h2>
+  <div class="flex flex-row bg-white shadow-lg w-full h-[200px] rounded-2xl overflow-hidden text-black">
+    <div class="relative w-1/2">
+      <Image class="h-full w-full" :imageSrc="image" :imageAlt="name" />
+      <h2 v-if="windowWidth > 675" class="text-center text-lg font-semibold">{{ name }}</h2>
     </div>
-    <div class="ProductData">
-      <div class="ProductInfo">
-        <h2 v-if="windowWidth > 375" class="ProductHeader">{{ name }}</h2>
-        <p>Free Shipping</p>
-        <span class="pricing">
-          <p class="old-price">£{{ OGP }}</p>
-          <p class="actual-price">£{{ Price }}</p>
-        </span>
-        <!-- Pass only the product name as a route parameter -->
-        <router-link :to="{ name: 'Product details', params: { URL: URL } }">More Info</router-link>
-
+    <div class="py-1">
+      <div>
+        <h2 v-if="windowWidth <= 675" class="text-base font-semibold">{{ name }}</h2>
+        <p class="text-gray-600">Free Shipping</p>
+        <div class="flex items-center gap-2">
+          <p class="text-red-500 line-through text-sm">£{{ OGP }}</p>
+          <p class="text-lg font-semibold">£{{ Price }}</p>
+        </div>
+        <router-link
+          :to="{ name: 'Product details', params: { URL: URL } }"
+          class="text-blue-500 hover:underline"
+        >
+          More Info
+        </router-link>
         <AddBasket :image="image" :name="name" :Price="Price" />
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.ProductCard {
-  background-color: white;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
-  width: 285px;
-  border-radius: 20px;
-  overflow: hidden;
-  color: black;
-}
-
-.ProductHeader {
-  text-align: center;
-}
-
-#productCardImage {
-  max-width: 100%;
-  height: auto;
-}
-
-.ProductInfo {
-  padding: 20px;
-}
-
-.pricing {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-}
-
-.old-price {
-  text-decoration: line-through red;
-  font-size: 14px;
-}
-
-.actual-price {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.product-preferences {
-  display: flex;
-  flex-direction: column;
-}
-</style>

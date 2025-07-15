@@ -1,65 +1,6 @@
 <script setup></script>
 
 <template>
-  <div class="loader">
-    <div class="container">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-  </div>
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 currentColor" viewBox="0 0 200 200"><path fill="currentColor" stroke="currentColor" stroke-width="15" transform-origin="center" d="m148 84.7 13.8-8-10-17.3-13.8 8a50 50 0 0 0-27.4-15.9v-16h-20v16A50 50 0 0 0 63 67.4l-13.8-8-10 17.3 13.8 8a50 50 0 0 0 0 31.7l-13.8 8 10 17.3 13.8-8a50 50 0 0 0 27.5 15.9v16h20v-16a50 50 0 0 0 27.4-15.9l13.8 8 10-17.3-13.8-8a50 50 0 0 0 0-31.7Zm-47.5 50.8a35 35 0 1 1 0-70 35 35 0 0 1 0 70Z"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="0;120" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></path></svg>
 </template>
 
-<style>
-/* Full-screen loader container */
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25vh;
-}
-
-/* Inner container holding the dots */
-.container {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 9999px;
-  display: flex;
-  gap: 16px;
-}
-
-/* Individual dots */
-.dot {
-  width: 20px;
-  height: 20px;
-  background-color: #1f2937; /* Gray-800 */
-  border-radius: 50%;
-  animation: pulse 1s infinite ease-in-out;
-}
-
-/* Animating the dots with delays */
-.dot:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.dot:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-/* Pulse animation */
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(0.8);
-  }
-}
-</style>

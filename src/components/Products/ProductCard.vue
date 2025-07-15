@@ -1,32 +1,43 @@
+<template>
+  <section class="flex flex-col gap-3 md:flex-row !my-4 px-2 flex items-center md:place-self-end md:max-w-[1024px] lg:max-w-[1240px]">
+        <div v-for="(Product, index) in Products.Product" :key="index" class="w-full flex items-center justify-center">
+          <div class="bg-white flex flex-row  shadow-lg w-full md:flex-col h-[225px] max-w-[500px] md:max-w-[650px] md:h-[450px] rounded-2xl overflow-hidden text-black">
+            <router-link
+            class="w-1/2 h-auto md:h-1/2 flex items-center justify-center md:w-full sm:max-h-[250px]"
+            :to="{ name: 'Product details', params: { URL: Product.URL } }"
+            >
+              <Image :imageSrc="Product.image" :imageAlt="Product.name" class="w-full h-full sm:max-w-[250px]" />
+            </router-link>
+            <div class="flex flex-col justify-center md:p-2">
+              <h1 class="text-start text-base !font-bold">
+                {{ Product.name }}
+              </h1>
+              <Text class="!text-gray-700 text-start text-sm !font-normal">
+                Free shipping 
+              </Text>
+              <router-link
+              class="w-full text-blue-500 hover:underline"
+              :to="{ name: 'Product details', params: { URL: Product.URL } }"
+              >
+              More Info
+              </router-link>
+              <Text class="!text-black !text-start">£{{ Product.Price }}</Text>
+              <AddMobileBasket :image="Product.image" :name="Product.name" :price="Product.Price" />
+            </div>
+          </div>
+      </div>
+  </section>
+</template>
+
 <script setup>
-import ProductData from '@/components/Products/ProductData.vue'
+import { RouterLink } from 'vue-router';
+import AddMobileBasket from '@/components/Basket/addMobileBasket.vue';
+import Text from '@/components/Reuseable/Text.vue';
+import Image from '@/components/Reuseable/Image.vue';
+
 
 defineProps({
   Products: Object
 })
+
 </script>
-
-<template>
-  <div class="ProductContainer">
-    <ProductData
-      v-for="Product in Products.Product"
-      :key="Product.name"
-      :Price="Product.Price"
-      :name="Product.name"
-      :image="Product.image"
-      :image2="Product.image2"
-      :URL="Product.URL"
-      :OGP="Product.OGP"
-    />
-  </div>
-</template>
-
-<style>
-.ProductContainer {
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 24%);
-  gap: 20px;
-  margin-bottom: 5rem;
-}
-</style>

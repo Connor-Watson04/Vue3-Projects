@@ -1,6 +1,9 @@
 <script setup>
-import { computed, ref, defineEmits } from 'vue'
+import { computed, ref} from 'vue'
 import { useToast } from 'vue-toastification'
+
+import Input from '../Reuseable/Input.vue'
+import Button from '../Reuseable/Button.vue'
 
 const emit = defineEmits(['switchToLogin'])
 const toast = useToast()
@@ -70,61 +73,64 @@ const handleSubmit = () => {
 
 <template>
   <section>
-    <form class="loginForm" @submit.prevent="handleSubmit">
-      <div class="createAccount-firstName">
+    <form class="flex flex-col gap-[1.2rem]" @submit.prevent="handleSubmit">
+      <div class="flex flex-col">
         <label for="firstName">First Name</label>
         <span>
-          <input
+          <Input
             v-model="firstName"
-            type="text"
+            input-type="text"
             name="firstName"
             id="firstName"
+            class="bg-white"
             required
-            placeholder="First Name"
+            input-placeholder="First Name"
           />
         </span>
       </div>
-      <div class="createAccount-lastName">
+      <div class="flex flex-col">
         <label for="lastName">Last Name</label>
         <span>
-          <input
+          <Input
             v-model="lastName"
-            type="text"
+            input-type="text"
             name="lastName"
             id="lastName"
+            class="bg-white"
             required
-            placeholder="Last Name"
+            input-placeholder="Last Name"
           />
         </span>
       </div>
 
-      <div class="createAccount-formEmail">
+      <div class="flex flex-col">
         <lable for="email"> Email </lable>
-        <span class="emailInput">
-          <input
+        <span class="flex flex-col gap-2">
+          <Input
             v-model="emailInput"
             name="email"
-            id="email"
-            type="text"
+            class="flex bg-white"
+            input-type="text"
             required
-            placeholder="Email"
+            input-placeholder="Email"
             @input="validateEmail"
           />
-          <input
+          <Input
             v-if="selectedOption === 'custom'"
             v-model="domainInput"
-            type="text"
+            input-type="text"
             id="domainInput"
-            placeholder="@exampleDomain.com"
+            input-placeholder="@exampleDomain.com"
+            class="bg-white"
           />
-          <select v-model="selectedOption">
+          <select v-model="selectedOption" class="bg-white text-black p-1">
             <option value="@gmail.com">@gmail.com</option>
             <option value="@hotmail.co.uk">@hotmail.co.uk</option>
             <option value="@yahoo.com">@yahoo.com</option>
             <option value="custom">Custom</option>
           </select>
         </span>
-        <p v-if="emailError" class="error">{{ emailError }}</p>
+        <p v-if="emailError" class="text-red-500">{{ emailError }}</p>
       </div>
       <div>
         <label>Password</label>
@@ -132,7 +138,7 @@ const handleSubmit = () => {
           v-model="password"
           type="password"
           id="createPassword"
-          class="password"
+          class="flex flex-col bg-white p-1"
           required
           placeholder="Password"
           @input="validatePasswords"
@@ -144,43 +150,24 @@ const handleSubmit = () => {
           v-model="confirmPassword"
           type="password"
           id="confirmPassword"
-          class="password"
+          class="flex flex-col bg-white p-1"
           required
           placeholder="Password"
           @input="validatePasswords"
         />
-        <p v-if="passwordError" class="error">{{ passwordError }}</p>
+        <p v-if="passwordError" class="text-red-500">{{ passwordError }}</p>
       </div>
-      <button :disabled="!isFormValid" type="submit">Create Account</button>
+      <Button
+  :disabled="!isFormValid"
+  button-type="submit"
+  :class="[
+    'bg-gradient-to-r',
+    isFormValid ? 'from-cyan-400 to-pink-300' : 'from-cyan-400/50 to-pink-400/50'
+  ]"
+>
+  Create Account
+</Button>
+
     </form>
   </section>
 </template>
-
-<style>
-.loginForm {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.createAccount-firstName,
-.createAccount-lastName,
-.password,
-#email {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  padding: 8px 1rem;
-}
-
-.emailInput {
-  display: flex;
-}
-
-.error {
-  color: red;
-  font-size: 0.9rem;
-}
-</style>

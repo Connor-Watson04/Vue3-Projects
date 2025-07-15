@@ -1,89 +1,115 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useBasket } from './useBasket' // Import the composable to use the shared state
+import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
+import { basketState } from '../../composables/basketState'
+import { useBasket } from '@/composables/useBasket'
 import { useToast } from 'vue-toastification'
 
+import removeConfirmation from '@/components/Reuseable/removeConfirmation.vue'
+import closeIcon from '../Reuseable/icons/closeIcon.vue'
+import Text from '../Reuseable/Text.vue'
+import Button from '../Reuseable/Button.vue'
+import DeleteIcon from '../Reuseable/icons/deleteIcon.vue'
+import Image from '../Reuseable/Image.vue'
+
 const toast = useToast()
+const { basket } = basketState()
+const { isBasketVisible, closeBasket } = useBasket()
 
-// Access the basket state
-const { basket } = useBasket()
+const showConfirmPopup = ref(false)
+const selectedItemIndex = ref<number | null>(null)
 
-// Compute the total price of products in the basket
+// Compute total price
 const totalPrice = computed(() => {
-  // Convert price to number in case it's a string and sum up the total price
-  return basket.reduce((acc, product) => {
-    const price = Number(product.price) // Ensure price is a number
-    return acc + price // Add to total (if price is already multiplied by quantity)
-  }, 0)
+  return basket.reduce((acc, product) => acc + Number(product.price), 0)
 })
 
-// Function to delete an item
-const deleteItem = (index: number) => {
-  basket.splice(index, 1)
+// Show popup and store item index
+const promptDelete = (index: number) => {
+  selectedItemIndex.value = index
+  showConfirmPopup.value = true
+}
 
-  localStorage.setItem('basketItems', JSON.stringify(basket))
+// Close popup
+const closePopup = () => {
+  showConfirmPopup.value = false
+  selectedItemIndex.value = null
+}
 
-  toast.success('Item successfully deleted')
+// Confirm delete
+const confirmDelete = () => {
+  if (selectedItemIndex.value !== null) {
+    basket.splice(selectedItemIndex.value, 1)
+    localStorage.setItem('basketItems', JSON.stringify(basket))
+    toast.success('Item successfully deleted')
+  }
+  closePopup()
 }
 </script>
 
 <template>
-  <section class="basketContainer">
-    <span class="basketHeading">
-      <h1 class="basketTitle">Your Basket</h1>
-      <button class="closeBasket" @click="$emit('closeBasket')">Close</button>
+   <main class="basketContainer text-black h-[90vh] w-[350px] shadow-xl !bg-white select-none overflow-y-scroll" @animationend="$emit('animationend')"
+        :class="{ 'slide-in': isBasketVisible, 'slide-out': !isBasketVisible }">
+        <span class="bg-white flex w-full items-center !border-b-1 sticky top-[0px] z-10 py-[10px] px-[1rem]">
+      <h1 class="text-[40px] w-full">Your Basket</h1>
+      <button @click="closeBasket">
+        <closeIcon/>
+      </button>
     </span>
-    <div>
+  <section class="h-[70vh] overflow-y-scroll scroll-smooth">
+    <div class="h-full">
       <div v-if="basket.length > 0" class="basketProduct-container">
-        <div v-for="(product, index) in basket" :key="index" class="basketProduct">
-          <img :src="product.image" class="basketImage" alt="Product Image" />
-          <div class="basketText">
-            <p class="basketName">{{ product.name }}</p>
-            <p class="basketSize">Size: {{ product.size }}</p>
-            <p class="basketQuantity">Quantity: {{ product.quantity }}</p>
-            <p class="basketPrice">Price: £{{ product.price }}</p>
-          </div>
+        <div v-for="(product, index) in basket" :key="index" class="hover:bg-[#d6d6d6] pt-2 flex justify-evenly border-1 border-black h-[20vh] !my-[5px] overflow-hidden relative">
+            <Image :imageSrc="product.image" class="h-[20vh] w-auto" imageAlt="Product Image" />
+            <div>
+              <p>{{ product.name }}</p>
+              <p>Size: {{ product.size }}</p>
+              <p>Quantity: {{ product.quantity }}</p>
+              <p>Price: £{{ product.price }}</p>
+            </div>
           <div>
-            <button @click="deleteItem(index)" class="deleteItem">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="14"
-                width="12.25"
-                viewBox="0 0 448 512"
-                class="deleteIcon"
-              >
-                <path
-                  d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"
-                />
-              </svg>
+            <button @click="promptDelete(index)" class="bg-none border-none">
+              <DeleteIcon  class="text-red-500 cursor-pointer hover:text-red-600"/>
             </button>
           </div>
+          
+          <removeConfirmation
+          message="Are you sure you want to Delete this item?"
+          :visible="showConfirmPopup && selectedItemIndex === index "
+          mode="inline"
+          @close="closePopup"
+          @confirm="confirmDelete"/>
         </div>
       </div>
-      <div v-else>
-        <h2 class="emptyBasket">Empty Basket</h2>
+      <div v-else class="h-full flex flex-col items-center justify-center px-8 gap-5">
+        <h1 class="text-3xl text-black/75 text-center !font-semibold">Your Basket is Empty</h1>
+        <Text class="!text-black/75 !font-semibold text-sm text-center">
+          Continue shopping and add items to your basket to view them here.
+        </Text>
+        <RouterLink to="/product" class="p-0">
+          <Button 
+          class="!font-semibold outline-2 outline-black active:outline-3"
+          buttonType="button" 
+          @click="closeBasket()" 
+          >
+            Go Shopping
+        </Button>
+      </RouterLink>
       </div>
     </div>
-
-    <div class="checkout">
-      <p>Total: £{{ totalPrice.toFixed(2) }}</p>
-      <button class="checkoutBtn">Checkout</button>
-    </div>
   </section>
+  <div class="sticky !b-0 w-full text-base bg-white py-[1.6rem] px-[1rem] border-t-1 border-[#ddd] flex justify-between items-center inset-shadow-sm inset-shadow-[#0000001a]">
+    <p>Total: £{{ totalPrice.toFixed(2) }}</p>
+    <Button class="w-1/2 outline-2 outline-black" 
+    :disableButton="basket.length === 0"
+    >
+    Checkout
+  </Button>
+  </div>
+</main>
 </template>
 
 <style scoped>
-.basketContainer {
-  color: black;
-  height: 85vh;
-  width: 350px;
-  box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 100);
-  background-color: white;
-  user-select: none;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
-}
-
 /* Slide-in animation */
 @keyframes slideIn {
   from {
@@ -110,96 +136,5 @@ const deleteItem = (index: number) => {
 
 .basketContainer.slide-out {
   animation: slideOut 0.3s forwards;
-}
-
-.basketHeading {
-  background-color: white;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-bottom: 10px;
-  border-bottom: 1px solid black;
-  position: sticky;
-  top: 0px; /* Stick the heading at the top */
-  z-index: 10; /* Ensure it stays on top of other content */
-  padding: 10px 1rem; /* Add some padding for better appearance */
-}
-
-.basketTitle {
-  font-size: 40px;
-  width: 100%;
-}
-
-.closeBasket {
-  border: 1.5px solid black;
-  background-color: rgba(255, 63, 63, 0.653);
-  font-size: 16px;
-  height: 30px;
-}
-
-.closeBasket:active {
-  transform: translateY(3px);
-}
-
-.emptyBasket {
-  height: 60vh;
-  text-align: center;
-  place-content: center;
-}
-.basketProduct-container {
-  padding: 0 10px;
-}
-
-.basketProduct {
-  display: flex !important;
-  justify-content: space-between;
-  border: 1px solid black;
-  height: 20vh;
-  margin-bottom: 5px;
-  overflow: hidden;
-}
-
-.basketText {
-  margin-top: 2px;
-}
-
-.basketImage {
-  height: 20vh;
-}
-
-.deleteItem {
-  background: none;
-  border: none;
-  position: relative;
-  top: 5px;
-}
-
-.deleteIcon path {
-  fill: rgb(255, 0, 0);
-  cursor: pointer;
-}
-
-.deleteIcon path:hover {
-  fill: rgb(198, 0, 0);
-  cursor: pointer;
-}
-
-.checkout {
-  position: sticky; /* Anchored to the bottom */
-  bottom: 0;
-  width: 100%;
-  font-size: 16px;
-  background-color: #fff;
-  padding: 1.6rem 1rem;
-  border-top: 1px solid #ddd; /* Top border for separation */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.checkoutBtn {
-  background-color: lightgreen;
-  padding: 0.4rem 2rem;
 }
 </style>

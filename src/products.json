@@ -1,20 +1,72 @@
 {
   "Product": [
     {
+      "Title":"N1ghtW0lf04 classic unisex fit",
       "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-White-back-rounded.png?raw=true",
       "image2": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/N1ghtW0lf04-Black-back-rounded.png?raw=true",
       "URL": "n1ghtw0lf04-hoodie",
       "name": "N1ghtW0lf04 Hoodie",
       "Price": 49.99,
       "OGP": 54.99,
-      "Desc": "This product is a unisex premium hoodie with cotton herritage. It was designed on printful who provide a modern, comfortable fit made with a soft, slightly heavyweight material. This product is one of their best sellers due to is Premium quality. It also comes with easy to remove tear away tags."
+      "Desc": "Show off your support for N1ghtW0lf04 with this classic unisex hoodie, featuring official branding and a sleek design made for comfort and style. With a soft 100% cotton face and durable cotton-poly blend, it's perfect for everyday wear. The front pouch pocket, matching flat drawstrings, and 3-panel hood bring a premium feel to this already standout piece.",
+      "Care Instructions": [
+        "Machine wash cold, inside-out, gentle cycle with mild detergent and similar colors",
+        "Use non-chlorine bleach, only when necessary",
+        "No fabric softeners",
+        "Tumble dry low, or hang-dry for longest life",
+        "Cool iron inside-out if necessary",
+        "Do not iron decoration",
+        "Do not dry clean"
+      ],
+      "Specifications":{
+        "Weight": "290 grams",
+        "Material": [
+          "80% ring-spun cotton",
+         "20% polyester"
+        ],
+        "Fit": "Unisex fit"
+      },
+      "Features": [
+        "Double-stitched",
+        "Taped neck and shoulders",
+        "1 × 1 ribbed cuffs and waistband",
+        "Front pouch pocket",
+        "Self-fabric patch on the back"
+      ]
     },
     {
+      "Title": "JellyBellyYT regular unisex fit",
       "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hoodies/JellyBellyyt-eco-hoodie.png?raw=true",
       "URL": "jellybellyyt-hoodie",
       "name": "JellyBellyYT Hoodie",
       "Price": 49.99,
-      "OGP": 54.99
+      "OGP": 54.99,
+      "Desc": "Level up your fit with the JellyBellyYT Hoodie, the ultimate blend of comfort, sustainability, and street-ready style. This unisex raglan hoodie is made with ultra-soft, brushed organic cotton and recycled materials, giving you that premium feel while keeping it eco-conscious. With a clean silhouette, classic raglan sleeves, and a jersey-lined hood, it's perfect for layering or rocking solo. Whether you're streaming, chilling, or stepping out, this hoodie has your back in every season. Certified fresh. Certified sustainable. A must-cop for any serious wardrobe.",
+      "Care Instructions": [
+        "Machine wash cold, inside-out, on a gentle cycle with similar colors",
+        "Use mild detergent and avoid fabric softeners",
+        "Only use non-chlorine bleach when necessary",
+        "Tumble dry low or hang dry for best results",
+        "Cool iron inside-out if needed, but avoid ironing over prints or designs",
+        "Do not dry clean"
+    ],
+    "Specifications": {
+      "Weight": "280g",
+      "Material": [ 
+        "80% organic cotton",
+        "20% recycled polyester"
+        ],
+      "Fit": "Regular unisex fit"
+    },
+    "Features": [
+      "Brushed lining for maximum comfort",
+      "Stylish raglan sleeves for a relaxed look",
+      "Jersey-lined hood with metal eyelets and drawstring stoppers",
+      "Ribbed cuffs and hem for a snug fit",
+      "Neck tape for added durability",
+      "Sustainably made with GRS, OCS, GOTS, OEKO-TEX, and PETA-Approved Vegan certified fabrics",
+      "Blank product responsibly sourced from Bangladesh"
+    ]
     },
     {
       "image": "https://github.com/Connor-Watson04/S-I-S-Products/blob/master/Merch/Hats/LE-Nightwolf-Cap-FrontView-blue.png?raw=true",

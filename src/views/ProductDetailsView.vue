@@ -1,8 +1,21 @@
 <script setup>
 import AddBasket from '@/components/Basket/AddBasket.vue'
 import Products from '@/products.json'
-import { onMounted, ref, onBeforeUnmount } from 'vue'
+import { onMounted, ref, onBeforeUnmount, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { useIsMobile } from '@/composables/useMobile'
+
+import sliderNav from '@/components/Reuseable/sliderNav.vue'
+import Text from '@/components/Reuseable/Text.vue'
+import Spinner from '@/components/Reuseable/Spinner.vue'
+import skeletonLoader from '@/components/Reuseable/skeletonLoader.vue'
+import SpecificationsTray from '@/components/Reuseable/specificationsTray.vue'
+import ArrowIcon from '@/components/Reuseable/icons/arrowIcon.vue'
+import Image from '@/components/Reuseable/Image.vue'
+
+const isLoading = ref(true)
+
+const {isMobile} = useIsMobile
 
 // Get the route parameter (the product name)
 const route = useRoute()
@@ -11,13 +24,41 @@ const productURL = route.params.URL.trim().toLowerCase() // Trim and make the pr
 // Product state
 const product = ref(null)
 
+const openTray = ref(false)
+
 // Image cycling
 const images = ref([]) // Store image URLs
 const currentImageIndex = ref(0) // Tracks the index of the currently displayed image
 const currentImage = ref(null) // Tracks the current image URL
+const imageInterval = ref(null)
 
 // Fading state
 const isFading = ref(false)
+
+
+let imageAlreadyHandled = false
+
+function handleImageLoad() {
+  if (imageAlreadyHandled) return
+  imageAlreadyHandled = true
+
+  if (images.value.length > 1) {
+    startImageCycle()
+  }
+  nextTick(() => {
+    isLoading.value = false
+  })
+}
+
+const startImageCycle = (() => {
+  clearInterval(imageInterval.value)
+
+  imageInterval.value = setInterval(() => {
+  switchImage()
+}, 5000)
+
+})
+
 
 // Switch image with fade effect
 function switchImage() {
@@ -42,6 +83,7 @@ function prev() {
     currentImageIndex.value =
       (currentImageIndex.value - 1 + images.value.length) % images.value.length
     currentImage.value = images.value[currentImageIndex.value]
+    startImageCycle()
   }
   isFading.value = false
 }
@@ -51,6 +93,7 @@ function next() {
   if (images.value.length > 1) {
     currentImageIndex.value = (currentImageIndex.value + 1) % images.value.length
     currentImage.value = images.value[currentImageIndex.value]
+    startImageCycle()
   }
   isFading.value = false
 }
@@ -61,147 +104,138 @@ function updateWindowWidth() {
   windowWidth.value = window.innerWidth
 }
 
-// Find the product by name in the "Product" array from your JSON, using case-insensitive and trimmed matching
-onMounted(() => {
-  window.addEventListener('resize', updateWindowWidth)
-
-  product.value = Products.Product.find((p) => p.URL.trim().toLowerCase() === productURL)
-
-  if (product.value) {
-    // Collect all image URLs
-    images.value = [product.value.image]
-    if (product.value.image2) images.value.push(product.value.image2)
-
-    // Set the initial image
-    currentImage.value = images.value[currentImageIndex.value]
-
-    // Start auto-switching images if there are more than one
-    if (images.value.length > 1) {
-      setInterval(() => {
-        switchImage()
-      }, 5000) // Change image every 5 seconds
-    }
+function handleNavClick(index) {
+  if (index > currentImageIndex.value) {
+    next()
+  } else if (index < currentImageIndex.value) {
+    prev()
   }
+}
+
+const openSpecifications = (() => {
+  openTray.value = true
+  window.scrollTo(top)
 })
 
+onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+  isLoading.value = true
+
+  setTimeout(() => {
+    const foundProduct = Products.Product.find(
+      (p) => p.URL.trim().toLowerCase() === productURL
+    )
+
+    if (foundProduct) {
+      product.value = foundProduct
+
+      images.value = [foundProduct.image]
+      if (foundProduct.image2) images.value.push(foundProduct.image2)
+
+      currentImage.value = images.value[currentImageIndex.value]
+
+      // ✅ Done loading the product data — no need to wait for image
+      isLoading.value = false
+    } else {
+      // Handle not found, or redirect if needed
+      isLoading.value = false
+    }
+  }, 500)
+})
+
+
 onBeforeUnmount(() => {
-  window.removeEventListener('resie', updateWindowWidth)
+  window.removeEventListener('resize', updateWindowWidth)
 })
 </script>
 
 <template>
-  <section v-if="product">
-    <div class="ProductDetails">
-      <div v-if="windowWidth <= 481">
-        <h1 class="PDP-title mobilePDP-Title">{{ product.name }}</h1>
+  <section  v-if="isLoading">
+    <skeletonLoader class="h-full flex-col">
+      <div class="w-full h-[35px] text-center bg-black/50">
+      </div>
+      <div class="bg-white/50 rounded-xl h-[400px] w-full flex flex-col items-center justify-center gap-2 p-2">
+        <Spinner />
+        <Text class="!text-gray-100">Content Loading</Text>
+      </div>
+      <div class="text-black h-[250px] w-full bg-white/50 rounded-2xl shadow-lg flex flex-col py-4 px-6">
+
+      </div>
+      </skeletonLoader>
+  </section>
+  <SpecificationsTray v-if="openTray" :Specifications="product.Specifications" @close="openTray = false" class="z-999" />
+  <section v-if="product && !isLoading" class="flex flex-col gap-2 h-full px-2">
+
+      <div class="w-full text-center bg-black/50 place-self-center max-w-[500px] md:max-w-[1000px]">
+        <h1 class="text-white !font-bold text-2xl">{{ product.name }}</h1>
       </div>
 
-      <div class="PDPImage-container">
-        <button v-if="images.length > 1" class="imageControls buttonPrev" @click="prev()"><</button>
-
-        <!-- Use currentImage for smooth transitions -->
-        <img
-          :src="currentImage"
-          class="product-image"
+    <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+      <div class="w-full flex flex-col gap-2 md:w-1/2 max-w-[500px]">
+        
+        <div class="bg-white rounded-xl h-[400px] w-full flex flex-col items-center justify-center">
+          <Image
+          :imageSrc="currentImage"
+          class="block product-image max-h-[350px] h-full"
           :class="{ fade: isFading }"
-          :alt="product.name"
-        />
-        <button v-if="images.length > 1" class="imageControls buttonNext" @click="next()">></button>
+          :imageAlt="product.name"
+          @load="handleImageLoad"
+          @error="handleImageError"
+          />
+          <sliderNav 
+          v-if="!isMobile && images.length > 1"
+          :count="images.length"
+          :active="currentImageIndex"
+          @navigate="handleNavClick"
+          />
+        </div>
+        <div v-if="windowWidth  >= 768" class="flex flex-col justify-center w-full px-2 text-white/85">
+        <h1 class="text-3xl  w-full  !font-bold max-w-[500px] place-self-center">
+          Description:
+        </h1>
+        <p class="!mb-2 text-sm !font-semibold max-w-[500px] place-self-center">{{ product.Desc }}</p>
+
+      <button @click="openSpecifications" class="flex max-w-[500px] flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
+        Specifications
+        <ArrowIcon class="rotate-270"/>
+      </button>
+    </div>
       </div>
-      <div class="PDP-Info">
-        <h1 class="PDP-title">{{ product.name }}</h1>
-        <div class="PDP-text">
-          <p class="product-desc">{{ product.Desc }}</p>
-          <span class="pricing">
-            <p class="OG-Price">£{{ product.OGP }}</p>
-            <p class="New-Price">£{{ product.Price }}</p>
-          </span>
-          <AddBasket :URL="product.URL" :name="product.name" :Price="product.Price" />
+      <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col md:place-self-start p-4 md:w-1/2 md:h-full max-w-[500px]">
+        <h1 class="text-center text-stable text-lg text-black !font-semibold !mb-2">{{ product.Title }}</h1>
+        <div class="flex flex-row md:flex-col md:gap-5 justify-between px-2">
+          <div>
+            <Text>Free Shipping</Text>
+            <div class="flex flex-row gap-2">
+              <p class="line-through decoration-red-500 decoration-[2px]">£{{ product.OGP }}</p>
+              <p class="text-lg !font-semibold">£{{ product.Price }}</p>
+            </div>
+          </div>
+          <AddBasket :URL="product.URL" :name="product.name" :image="product.image" :Price="product.Price" />
         </div>
       </div>
     </div>
+    <div v-if="windowWidth  <= 767" class="flex justify-center w-full px-2 ">
+      <button @click="openSpecifications" class="flex max-w-[500px] flex-row py-1 px-4 bg-white border-1 border-black w-full text-2xl text-black justify-between">
+        Specifications
+        <ArrowIcon class="rotate-270"/>
+      </button>
+    </div>
+      <div v-if="windowWidth  <= 767" class="flex flex-col w-full justify-center p-2 sm:py-4 sm:px-9">
+        <h1 class="text-3xl text-white w-full  !font-bold max-w-[500px] place-self-center">
+          Description:
+        </h1>
+        <p class="!mb-2 text-sm !font-semibold max-w-[500px] place-self-center">{{ product.Desc }}</p>
+      </div>
   </section>
-  <div v-else>
-    <p>Loading...</p>
-  </div>
 </template>
 
-<style>
-.ProductDetails {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin-bottom: 10rem;
-}
-
-.PDPImage-container {
-  background-color: white;
-  width: 75%;
-  height: 100%;
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 6rem;
-}
-
+<style scoped>
 .product-image {
-  height: 420px;
-  display: block;
   transition: opacity 2s ease; /* Smooth fade transition for image */
 }
 
 .product-image.fade {
   opacity: 0; /* Fully fade out */
-}
-
-.PDP-Info {
-  color: black;
-  background-color: white;
-  width: 95%;
-  height: 100%;
-  border-radius: 11px;
-  box-shadow: -5px 2px 15px 2px rgba(0, 0, 0, 0.3);
-}
-
-.PDP-title {
-  text-align: center;
-  margin: 0 0 2rem 0;
-}
-
-.mobilePDP-Title {
-  margin-bottom: 0.4rem;
-  width: 100%;
-  padding: 1rem;
-  background-color: var(--color-background);
-  color: var(--color-text-alt);
-}
-
-.PDP-text {
-  padding: 0 3rem;
-}
-
-.OG-Price {
-  text-decoration: line-through red;
-  font-size: 16px;
-}
-
-.New-Price {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.imageControls {
-  border: none;
-  font-size: 50px;
-  position: relative;
-  cursor: pointer;
-}
-
-.buttonPrev {
-  left: 20px;
-}
-
-.buttonNext {
-  right: 20px;
 }
 </style>

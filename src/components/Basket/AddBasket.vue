@@ -1,9 +1,24 @@
+<template>
+  <form class="flex flex-col" @submit.prevent="productData">
+    <!-- Bind the selected size to the ProductSizes component -->
+    <ProductSizes v-model:size="selectedSize" />
+    <ProductQuantity v-model:quantity="chosenQuantity" />
+    <div class="mt-2">
+      <Button class="rounded-lg border-1">
+        Add to basket
+      </Button>
+    </div>
+  </form>
+</template>
+
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import ProductSizes from '@/components/Products/ProductSizes.vue'
 import ProductQuantity from '@/components/Products/ProductQuantity.vue'
-import { useBasket } from './useBasket'
+import { basketState } from '../../composables/basketState'
 import { useToast } from 'vue-toastification'
+
+import Button from '../Reuseable/Button.vue'
 
 const toast = useToast()
 
@@ -15,7 +30,7 @@ const props = defineProps({
 })
 
 // Access the basket and addProduct function from shared state
-const { addProduct, basket } = useBasket() // Assuming `basket` is an array that stores products
+const { addProduct } = basketState() // Assuming `basket` is an array that stores products
 
 // Create refs to store the selected size and quantity
 const selectedSize = ref('')
@@ -68,27 +83,3 @@ onMounted(() => {
   }
 })
 </script>
-
-<template>
-  <form class="product-preferences" @submit.prevent="productData">
-    <!-- Bind the selected size to the ProductSizes component -->
-    <ProductSizes v-model:size="selectedSize" />
-    <ProductQuantity v-model:quantity="chosenQuantity" />
-    <div class="addToBasket-container">
-      <button class="basketSubmit-btn">Add to basket</button>
-    </div>
-  </form>
-</template>
-
-<style>
-.addToBasket-container {
-  margin-top: 10px;
-}
-
-.basketSubmit-btn {
-  background-color: lightgreen;
-  border: solid black 1px;
-  padding: 10px 1rem;
-  cursor: pointer;
-}
-</style>
