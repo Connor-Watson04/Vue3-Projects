@@ -35,7 +35,7 @@ const handleLogin = () => {
 
 <template>
   <section>
-    <form class="flex flex-col items-center gap-2" @submit.prevent="handleLogin">
+    <form class="flex flex-col items-center gap-7" @submit.prevent="handleLogin">
       <div>
         <lable for="email"> Email </lable>
         <Input

@@ -4,8 +4,8 @@
         v-for="index in count" 
         :key="index" 
         :class="[
-            'w-5 h-5 p-1 rounded-full outline-2 outline-gray-800 transition border-2 border-blue-400',
-            index - 1 === active ? 'bg-pink-500' : 'bg-blue-400'
+            'w-5 h-5 p-1 rounded-full outline-2 outline-black transition',
+            index - 1 === active ? 'bg-black' : 'bg-black/50'
         ]" 
         @click="$emit('navigate', index - 1)"/>
     </div>

@@ -96,7 +96,7 @@ function handleSearch() {
           </div>
         </form>    
         <div v-if="isMobile" class="!h-[3px] w-5/6 bg-gray-600"></div>
-      <div class="flex flex-row items-center justify-center w-full lg:w-1/2 h-full gap-2">
+      <div class="flex flex-row items-center justify-center w-full lg:w-1/2 h-full gap-4">
         <div v-if="isMobile" >
           <form @submit.prevent="handleSearch" class="flex flex-row gap-2 md:gap-4">
             <Button v-if="isMobile" @click="() => { toggleMenu(), closeBasket() }" class="bg-none border-none !py-0 !px-0 md:text-lg active:text-[var(--cyan-default)] visited:text-[var(--pink-default)]" buttonType="button">

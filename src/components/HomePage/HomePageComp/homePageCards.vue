@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col gap-3 md:flex-row !my-4 px-2 flex items-center md:justify-center">
-      <div v-for="(Product, index) in Products.Product.slice(0, 4)" :key="index" >
+      <div v-for="(Product, index) in Products.Product.slice(0, 4)" :key="index" class="min-w-[360px] md:min-w-0">
           <div class="bg-white flex flex-row shadow-lg w-full md:flex-col h-[225px] max-w-[500px] md:h-full rounded-2xl overflow-hidden text-black">
               <router-link
               class="w-1/2 h-auto flex items-center justify-center md:w-full sm:max-h-[250px] sm:max-w-[250px]"

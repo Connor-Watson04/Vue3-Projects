@@ -2,9 +2,13 @@
 import { ref } from 'vue'
 import CreateAccount from './Create-Account.vue'
 import LogIn from './LogIn.vue'
+import Benefits from './benefits.vue'
+import { useIsMobile } from '@/composables/useMobile'
 
 // Define a reactive variable to track which form is visible
 const isLogInVisible = ref(true)
+
+const {isMobile} = useIsMobile()
 
 // Function to toggle forms
 function toggleForm(showLogIn) {
@@ -13,17 +17,20 @@ function toggleForm(showLogIn) {
 </script>
 
 <template>
-  <section class="flex justify-center !mb-[5rem] w-full px-5">
-    <div class="w-full h-auto rounded-[15px] bg-[var(--color-promo)] !pb-[2rem]">
-      <div class="flex justify-center gap-[1rem] items-center !mb-[1.6rem]">
+  <section class="flex flex-col lg:flex-row justify-center items-center !mb-[4rem] w-full px-5 ">
+    <div class="w-full min-h-[200px] max-w-[500px] flex flex-col gap-8 items-center justify-center bg-[var(--color-promo)] !py-[2rem] lg:!pb-[4rem] rounded-[15px]"
+    :class="{'rounded-b-none': isMobile, 'rounded-r-none': !isMobile}"
+    >
+
+      <div class="flex justify-center items-center gap-[1rem] place-self-top">
         <div class="link-container">
           <!-- Call toggleForm with true for Log In and false for Create Account -->
-          <a class="text-lg bg-none border-none decoration-none cursor-pointer select-none text-center" :class="{ 'text-yellow-500 underline': isLogInVisible }" @click="toggleForm(true)">
+          <a class="text-lg md:text-xl bg-none border-none decoration-none cursor-pointer select-none text-center" :class="{ 'text-yellow-500 underline': isLogInVisible }" @click="toggleForm(true)">
             Log In
           </a>
         </div>
         <div class="link-container">
-          <a class="text-lg bg-none border-none decoration-none cursor-pointer select-none text-center" :class="{ 'text-yellow-500 underline': !isLogInVisible }" @click="toggleForm(false)">
+          <a class="text-lg md:text-xl bg-none border-none decoration-none cursor-pointer select-none text-center" :class="{ 'text-yellow-500 underline': !isLogInVisible }" @click="toggleForm(false)">
             Create Account
           </a>
         </div>
@@ -38,6 +45,7 @@ function toggleForm(showLogIn) {
       </transition>
       </div>
     </div>
+    <Benefits v-show="!isLogInVisible" class="rounded-[15px] w-full lg:h-[612px]" :class="{'rounded-t-none': isMobile, 'rounded-l-none': !isMobile}" />
   </section>
 </template>
 

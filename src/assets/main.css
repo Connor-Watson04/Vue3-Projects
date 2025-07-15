@@ -19,5 +19,15 @@
   }
 }
 
-@media (min-width: 1024px) {
+ #navigation {
+  background: #d8d8d8ae; /* background */
+  color: #000000; /* arrow color (example: hot pink) */
+  border-radius: 50%;
+}
+
+.carousel__pagination-button {
+  height: 15px !important;
+  width: 15px !important;
+  border-radius: 50% !important;
+
 }

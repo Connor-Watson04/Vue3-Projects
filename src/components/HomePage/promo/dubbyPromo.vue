@@ -1,7 +1,7 @@
 <template>
   <section class="h-full">
-    <div class="relative flex flex-col justify-center items-center h-full">
-      <h1 class="text-center text-xl text-[var(--color-dubby)] !font-bold text-shadow-md z-10">
+    <div class="relative flex flex-col gap-5 justify-center items-center h-full">
+      <h1 class="text-center sm:text-2xl text-[var(--color-dubby)] !font-bold text-shadow-md z-10">
         DUBBY Products
       </h1>
       <Image class="mxa-h-[500px] lg:place-self-center" imageSrc="/src/assets/Images/promos/promo.png" image-alt="Promotional Image"/>

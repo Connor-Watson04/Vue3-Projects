@@ -1,5 +1,5 @@
 <template>
-    <div class="min-w-[250px] snap-start">
+    <div class="min-w-[250px] max-w-[290px] !mb-5 snap-start">
       <Image :imageSrc="conceptToy.image" :imageAlt="conceptToy.name" class="h-[500px] w-full object-cover" />
     </div>
   </template>

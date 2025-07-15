@@ -203,7 +203,7 @@ onBeforeUnmount(() => {
       </div>
       <div class="text-black w-full bg-white rounded-2xl shadow-lg flex flex-col md:place-self-start p-4 md:w-1/2 md:h-full max-w-[500px]">
         <h1 class="text-center text-stable text-lg text-black !font-semibold !mb-2">{{ product.Title }}</h1>
-        <div class="flex flex-row justify-between px-2">
+        <div class="flex flex-row md:flex-col md:gap-5 justify-between px-2">
           <div>
             <Text>Free Shipping</Text>
             <div class="flex flex-row gap-2">
